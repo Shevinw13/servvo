@@ -39,14 +39,14 @@ export function Input({
 
   const labelStyle: TextStyle = {
     fontSize: tokens.typography.bodySmall.fontSize,
-    fontWeight: tokens.typography.bodySmall.fontWeight,
+    fontWeight: '500',
     lineHeight: tokens.typography.bodySmall.lineHeight,
     color: tokens.colors.text,
-    marginBottom: tokens.spacing.xs,
+    marginBottom: tokens.spacing.xs + 2,
   };
 
   const inputStyle: ViewStyle & TextStyle = {
-    backgroundColor: tokens.colors.surface,
+    backgroundColor: isFocused ? '#FFFFFF' : tokens.colors.background,
     borderRadius: tokens.borderRadius.md,
     borderWidth: 1,
     borderColor: error

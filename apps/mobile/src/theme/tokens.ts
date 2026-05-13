@@ -1,25 +1,25 @@
 /**
  * Design tokens for the Servvo customer app.
- * These define the visual language: colors, spacing, border radii, shadows, and typography.
+ * Warm, earthy, organic editorial aesthetic — premium lifestyle lawn care brand.
  * Brand config can override primary/accent colors at runtime.
  */
 
 export const defaultTokens = {
   colors: {
-    primary: '#1B365D', // Deep blue
-    primaryLight: '#2A4A7F',
-    accent: '#4CAF50', // Green
-    accentLight: '#81C784',
-    background: '#FFFFFF',
-    surface: '#F8F9FA',
+    primary: '#2D4A2D', // Dark forest green
+    primaryLight: '#3D6B3D', // Lighter forest green
+    accent: '#5C8A4D', // Sage/olive green
+    accentLight: '#8FB87A', // Light sage
+    background: '#FAFAF5', // Warm cream/off-white
+    surface: '#FFFFFF', // White cards
     surfaceElevated: '#FFFFFF',
-    text: '#1A1A2E',
-    textSecondary: '#6B7280',
-    textMuted: '#9CA3AF',
-    border: '#E5E7EB',
-    error: '#EF4444',
-    success: '#10B981',
-    warning: '#F59E0B',
+    text: '#1A1A1A', // Near black
+    textSecondary: '#5C5C5C', // Dark gray
+    textMuted: '#8C8C8C', // Medium gray
+    border: '#E8E5E0', // Warm light border
+    error: '#C53030', // Muted red
+    success: '#2D6A2D', // Forest green (same family as primary)
+    warning: '#B7791F', // Warm amber
   },
   spacing: {
     xs: 4,
@@ -38,31 +38,31 @@ export const defaultTokens = {
   },
   shadows: {
     sm: {
-      elevation: 2,
+      elevation: 1,
       shadowOffset: { width: 0, height: 1 },
-      shadowRadius: 3,
-      shadowOpacity: 0.08,
+      shadowRadius: 2,
+      shadowOpacity: 0.05,
     },
     md: {
-      elevation: 4,
-      shadowOffset: { width: 0, height: 2 },
-      shadowRadius: 6,
-      shadowOpacity: 0.12,
+      elevation: 2,
+      shadowOffset: { width: 0, height: 1 },
+      shadowRadius: 4,
+      shadowOpacity: 0.08,
     },
     lg: {
-      elevation: 8,
-      shadowOffset: { width: 0, height: 4 },
-      shadowRadius: 12,
-      shadowOpacity: 0.15,
+      elevation: 4,
+      shadowOffset: { width: 0, height: 2 },
+      shadowRadius: 8,
+      shadowOpacity: 0.1,
     },
   },
   typography: {
-    h1: { fontSize: 28, fontWeight: '700' as const, lineHeight: 34 },
-    h2: { fontSize: 22, fontWeight: '600' as const, lineHeight: 28 },
+    h1: { fontSize: 32, fontWeight: '700' as const, lineHeight: 38 },
+    h2: { fontSize: 24, fontWeight: '600' as const, lineHeight: 30 },
     h3: { fontSize: 18, fontWeight: '600' as const, lineHeight: 24 },
-    body: { fontSize: 16, fontWeight: '400' as const, lineHeight: 22 },
+    body: { fontSize: 16, fontWeight: '400' as const, lineHeight: 24 },
     bodySmall: { fontSize: 14, fontWeight: '400' as const, lineHeight: 20 },
-    caption: { fontSize: 12, fontWeight: '400' as const, lineHeight: 16 },
+    caption: { fontSize: 12, fontWeight: '500' as const, lineHeight: 16 },
     button: { fontSize: 16, fontWeight: '600' as const, lineHeight: 20 },
   },
 };

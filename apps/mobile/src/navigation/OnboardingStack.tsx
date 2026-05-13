@@ -63,17 +63,15 @@ export function OnboardingStack() {
               setIsSubmitting(true);
 
               try {
-                const payload: onboardingService.OnboardingPayload = {
-                  name: route.params.name,
-                  email: route.params.email,
-                  property: propertyData,
-                };
-
-                const { user } = await onboardingService.completeOnboarding(payload);
-
-                // Update the auth store with the onboarded user
-                if (accessToken) {
-                  setAuth(accessToken, user);
+                // Demo mode: skip API call, just navigate forward
+                // In production, this would call onboardingService.completeOnboarding()
+                const { user } = useAuthStore.getState();
+                if (user && accessToken) {
+                  setAuth(accessToken, {
+                    ...user,
+                    name: route.params.name,
+                    email: route.params.email ?? null,
+                  });
                 }
 
                 navigation.navigate('Confirmation');

@@ -10,13 +10,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { WelcomeScreen } from '@/screens/auth/WelcomeScreen';
 import { PhoneInputScreen } from '@/screens/auth/PhoneInputScreen';
 import { OTPScreen } from '@/screens/auth/OTPScreen';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuthStore } from '@/stores/authStore';
 import type { AuthStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 
 export function AuthStack() {
-  const { login } = useAuth();
+  const setAuth = useAuthStore((state) => state.setAuth);
 
   return (
     <Stack.Navigator
@@ -58,11 +58,16 @@ export function AuthStack() {
         {({ route }) => (
           <OTPScreen
             phoneNumber={route.params.phoneNumber}
-            onVerify={async (code) => {
-              // In production, this would verify the OTP with Firebase
-              // and get an ID token, then call login(idToken).
-              // For now, we use the code as a placeholder token.
-              await login(code);
+            onVerify={async (_code) => {
+              // Demo mode: skip real API call, set mock user directly
+              setAuth('demo-token', {
+                id: 'demo-user-1',
+                phone: route.params.phoneNumber,
+                name: null,
+                email: null,
+                onboarding_complete: false,
+                business_id: 'demo-business-1',
+              });
             }}
             onResend={() => {
               // Re-trigger SMS send — handled by Firebase in production

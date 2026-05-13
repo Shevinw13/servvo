@@ -29,7 +29,7 @@ export function Button({
 
   const getContainerStyle = (): ViewStyle => {
     const base: ViewStyle = {
-      borderRadius: tokens.borderRadius.md,
+      borderRadius: tokens.borderRadius.lg,
       paddingVertical: tokens.spacing.md,
       paddingHorizontal: tokens.spacing.lg,
       alignItems: 'center',
@@ -46,7 +46,7 @@ export function Button({
       case 'secondary':
         return {
           ...base,
-          backgroundColor: 'transparent',
+          backgroundColor: '#FFFFFF',
           borderWidth: 1,
           borderColor: tokens.colors.primary,
         };

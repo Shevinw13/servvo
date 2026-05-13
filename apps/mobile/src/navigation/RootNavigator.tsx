@@ -11,7 +11,7 @@
 import React, { useEffect } from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuthStore } from '@/stores/authStore';
 import { useTheme } from '@/theme/BrandThemeProvider';
 import { AuthStack } from './AuthStack';
 import { OnboardingStack } from './OnboardingStack';
@@ -31,11 +31,16 @@ function LoadingScreen() {
 }
 
 export function RootNavigator() {
-  const { isAuthenticated, isLoading, user, restoreSession } = useAuth();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const isLoading = useAuthStore((state) => state.isLoading);
+  const user = useAuthStore((state) => state.user);
+  const setLoading = useAuthStore((state) => state.setLoading);
 
   useEffect(() => {
-    restoreSession();
-  }, [restoreSession]);
+    // In demo mode, just stop loading immediately
+    // In production, this would call restoreSession() to check secure store
+    setLoading(false);
+  }, [setLoading]);
 
   if (isLoading) {
     return <LoadingScreen />;

@@ -24,7 +24,7 @@ export type OnboardingStackParamList = {
 };
 
 /**
- * Appointments stack param list — screens within the Appointments tab.
+ * Appointments stack param list — screens within the Schedule tab.
  */
 export type AppointmentsStackParamList = {
   AppointmentsList: undefined;
@@ -34,13 +34,13 @@ export type AppointmentsStackParamList = {
 
 /**
  * Main tab param list — bottom tab navigator screens.
+ * 4 tabs: Home, Schedule, Messages, Account
  */
 export type MainTabParamList = {
   Home: undefined;
-  Appointments: undefined;
+  Schedule: undefined;
   Messages: undefined;
-  Billing: undefined;
-  Profile: undefined;
+  Account: undefined;
 };
 
 /**

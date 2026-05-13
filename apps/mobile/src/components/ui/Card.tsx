@@ -11,19 +11,23 @@ export interface CardProps {
 export function Card({ children, style, variant = 'default' }: CardProps) {
   const { tokens } = useTheme();
 
-  const shadowTokens =
-    variant === 'elevated' ? tokens.shadows.lg : tokens.shadows.md;
-
   const cardStyle: ViewStyle = {
     backgroundColor: tokens.colors.surfaceElevated,
     borderRadius: tokens.borderRadius.lg,
     padding: tokens.spacing.lg,
-    shadowColor: '#000',
-    shadowOffset: shadowTokens.shadowOffset,
-    shadowRadius: shadowTokens.shadowRadius,
-    shadowOpacity: shadowTokens.shadowOpacity,
-    elevation: shadowTokens.elevation,
+    borderWidth: 1,
+    borderColor: tokens.colors.border,
   };
+
+  // Only add subtle shadow for elevated variant
+  if (variant === 'elevated') {
+    const shadowTokens = tokens.shadows.sm;
+    cardStyle.shadowColor = '#000';
+    cardStyle.shadowOffset = shadowTokens.shadowOffset;
+    cardStyle.shadowRadius = shadowTokens.shadowRadius;
+    cardStyle.shadowOpacity = shadowTokens.shadowOpacity;
+    cardStyle.elevation = shadowTokens.elevation;
+  }
 
   return <View style={[cardStyle, style]}>{children}</View>;
 }

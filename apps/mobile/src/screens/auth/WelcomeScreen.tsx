@@ -1,12 +1,12 @@
 /**
- * WelcomeScreen — Premium branded splash screen.
- * Displays the business logo, tagline, and a "Get Started" CTA.
+ * WelcomeScreen — Premium editorial welcome experience.
+ * Warm cream background, leaf motif, feature list with organic styling.
  *
  * Validates: Requirements 1.1
  */
 
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { useTheme } from '@/theme/BrandThemeProvider';
 import { Button, Typography } from '@/components/ui';
 
@@ -14,38 +14,76 @@ export interface WelcomeScreenProps {
   onGetStarted: () => void;
 }
 
+interface FeatureItem {
+  title: string;
+  description: string;
+}
+
+const FEATURES: FeatureItem[] = [
+  {
+    title: 'Trusted Professionals',
+    description: 'Vetted experts who care for your home.',
+  },
+  {
+    title: 'Beautiful Results',
+    description: 'We take pride in every detail.',
+  },
+  {
+    title: 'Real-time Updates',
+    description: 'Know what\'s happening, every step of the way.',
+  },
+  {
+    title: 'Personalized Care',
+    description: 'Plans tailored to your lawn\'s unique needs.',
+  },
+];
+
 export function WelcomeScreen({ onGetStarted }: WelcomeScreenProps) {
   const { tokens } = useTheme();
 
   return (
     <View style={[styles.container, { backgroundColor: tokens.colors.background }]}>
-      {/* Hero imagery placeholder */}
-      <View
-        style={[
-          styles.heroImage,
-          {
-            backgroundColor: tokens.colors.accent,
-            borderRadius: tokens.borderRadius.xl,
-          },
-        ]}
-        accessibilityLabel="Lawn care imagery"
-      />
-
-      {/* Branded logo placeholder */}
+      {/* Logo */}
       <View style={styles.logoContainer}>
-        <Typography variant="h1" style={styles.logoText}>
-          Servvo
-        </Typography>
+        <Text style={styles.leafIcon}>🌿</Text>
+        <Text style={[styles.logoText, { color: tokens.colors.primary }]}>
+          servvo
+        </Text>
       </View>
 
-      {/* Tagline */}
+      {/* Headline */}
+      <Typography variant="h1" style={styles.headline}>
+        Your home. Our care.
+      </Typography>
+
+      {/* Subtitle */}
       <Typography
         variant="body"
         color={tokens.colors.textSecondary}
-        style={styles.tagline}
+        style={styles.subtitle}
       >
-        Your trusted partner for a beautiful, healthy lawn.
+        Premium lawn care. Effortless experience.
       </Typography>
+
+      {/* Feature list */}
+      <View style={styles.featureList}>
+        {FEATURES.map((feature) => (
+          <View key={feature.title} style={styles.featureItem}>
+            <Text style={styles.featureBullet}>🌿</Text>
+            <View style={styles.featureContent}>
+              <Typography variant="body" style={styles.featureTitle}>
+                {feature.title}
+              </Typography>
+              <Typography
+                variant="bodySmall"
+                color={tokens.colors.textSecondary}
+              >
+                {feature.description}
+              </Typography>
+            </View>
+          </View>
+        ))}
+      </View>
 
       {/* Spacer */}
       <View style={styles.spacer} />
@@ -67,24 +105,45 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingTop: 80,
     paddingBottom: 48,
-    alignItems: 'center',
-  },
-  heroImage: {
-    width: '100%',
-    height: 220,
-    opacity: 0.15,
   },
   logoContainer: {
-    marginTop: 32,
+    flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 32,
+  },
+  leafIcon: {
+    fontSize: 28,
+    marginRight: 8,
   },
   logoText: {
-    letterSpacing: 1,
+    fontSize: 28,
+    fontWeight: '700',
+    letterSpacing: -0.5,
   },
-  tagline: {
-    marginTop: 12,
-    textAlign: 'center',
-    paddingHorizontal: 16,
+  headline: {
+    marginBottom: 8,
+  },
+  subtitle: {
+    marginBottom: 32,
+  },
+  featureList: {
+    gap: 20,
+  },
+  featureItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+  featureBullet: {
+    fontSize: 16,
+    marginRight: 12,
+    marginTop: 2,
+  },
+  featureContent: {
+    flex: 1,
+  },
+  featureTitle: {
+    fontWeight: '600',
+    marginBottom: 2,
   },
   spacer: {
     flex: 1,
