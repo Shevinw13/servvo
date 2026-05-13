@@ -30,6 +30,30 @@ export type AppointmentsStackParamList = {
   AppointmentsList: undefined;
   AppointmentDetail: { appointmentId: string };
   Reschedule: { appointmentId: string };
+  ServiceHistory: undefined;
+  ReviewFlow: { appointmentId: string };
+  Rebooking: { serviceType?: string } | undefined;
+};
+
+/**
+ * Account stack param list — screens within the Account tab.
+ */
+export type AccountStackParamList = {
+  Profile: undefined;
+  NotificationPrefs: undefined;
+  BillingHome: undefined;
+  InvoiceDetail: { invoiceId: string };
+  Payment: { invoiceId: string; amountCents: number; description: string };
+};
+
+/**
+ * Billing stack param list — screens within the Account tab billing flow.
+ * @deprecated Use AccountStackParamList instead
+ */
+export type BillingStackParamList = {
+  BillingHome: undefined;
+  InvoiceDetail: { invoiceId: string };
+  Payment: { invoiceId: string; amountCents: number; description: string };
 };
 
 /**
@@ -98,4 +122,20 @@ export type AppointmentDetailScreenNavigationProps = NativeStackScreenProps<
 export type RescheduleScreenNavigationProps = NativeStackScreenProps<
   AppointmentsStackParamList,
   'Reschedule'
+>;
+
+// Screen prop types for billing screens
+export type BillingHomeScreenNavigationProps = NativeStackScreenProps<
+  BillingStackParamList,
+  'BillingHome'
+>;
+
+export type InvoiceDetailScreenNavigationProps = NativeStackScreenProps<
+  BillingStackParamList,
+  'InvoiceDetail'
+>;
+
+export type PaymentScreenNavigationProps = NativeStackScreenProps<
+  BillingStackParamList,
+  'Payment'
 >;

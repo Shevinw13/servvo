@@ -2,8 +2,10 @@
  * AppointmentDetailScreen — Full appointment details with status, notes, and actions.
  * Shows service type, date, time, address, provider, status progress bar,
  * and provides Reschedule/Cancel actions.
+ * Subscribes to real-time WebSocket status updates and displays arrival window
+ * when status is "on_the_way" and a completion summary when "completed".
  *
- * Validates: Requirements 5.2, 5.4
+ * Validates: Requirements 5.2, 5.4, 6.1, 6.2, 6.4, 6.5
  */
 
 import React, { useCallback, useEffect, useState } from 'react';
@@ -17,12 +19,15 @@ import {
 import { useTheme } from '@/theme/BrandThemeProvider';
 import { useTerminology } from '@/utils/terminology';
 import { Typography, Card, Button } from '@/components/ui';
-import { StatusProgressBar } from '@/components/service-status';
+import { StatusProgressBar, StatusBadge } from '@/components/service-status';
+import type { ServiceStatus } from '@/components/service-status';
 import {
   getAppointmentById,
   cancelAppointment,
   type Appointment,
 } from '@/services/appointments.service';
+import { useWebSocket } from '@/hooks/useWebSocket';
+import type { StatusUpdatePayload } from '@/services/websocket.service';
 import type { AppointmentDetailScreenNavigationProps } from '@/navigation/types';
 
 function formatDate(dateStr: string): string {
@@ -60,12 +65,18 @@ export function AppointmentDetailScreen({
   const [appointment, setAppointment] = useState<Appointment | null>(null);
   const [loading, setLoading] = useState(true);
   const [cancelling, setCancelling] = useState(false);
+  const [currentStatus, setCurrentStatus] = useState<ServiceStatus | null>(null);
+  const [arrivalWindow, setArrivalWindow] = useState<{ start: string; end: string } | null>(null);
+
+  const { subscribeToAppointment, unsubscribeFromAppointment, onStatusUpdate } =
+    useWebSocket();
 
   useEffect(() => {
     async function fetchAppointment() {
       try {
         const data = await getAppointmentById(appointmentId);
         setAppointment(data);
+        setCurrentStatus(data.status);
       } catch {
         // Handle error silently — could show error state
       } finally {
@@ -74,6 +85,24 @@ export function AppointmentDetailScreen({
     }
     fetchAppointment();
   }, [appointmentId]);
+
+  // Subscribe to real-time status updates
+  useEffect(() => {
+    subscribeToAppointment(appointmentId);
+
+    onStatusUpdate((payload: StatusUpdatePayload) => {
+      if (payload.appointmentId === appointmentId) {
+        setCurrentStatus(payload.status);
+        if (payload.arrivalWindow) {
+          setArrivalWindow(payload.arrivalWindow);
+        }
+      }
+    });
+
+    return () => {
+      unsubscribeFromAppointment(appointmentId);
+    };
+  }, [appointmentId, subscribeToAppointment, unsubscribeFromAppointment, onStatusUpdate]);
 
   const handleReschedule = useCallback(() => {
     navigation.navigate('Reschedule', { appointmentId });
@@ -139,7 +168,8 @@ export function AppointmentDetailScreen({
     );
   }
 
-  const isUpcoming = appointment.status !== 'completed';
+  const isUpcoming = (currentStatus ?? appointment.status) !== 'completed';
+  const displayStatus = currentStatus ?? appointment.status;
 
   return (
     <View
@@ -156,11 +186,80 @@ export function AppointmentDetailScreen({
 
         {/* Status Progress */}
         <Card style={styles.section}>
-          <Typography variant="h3" style={styles.sectionTitle}>
-            Service Status
-          </Typography>
-          <StatusProgressBar currentStatus={appointment.status} />
+          <View style={styles.statusHeader}>
+            <Typography variant="h3">
+              Service Status
+            </Typography>
+            <StatusBadge status={displayStatus} />
+          </View>
+          <StatusProgressBar currentStatus={displayStatus} />
         </Card>
+
+        {/* Arrival Window — shown when status is "on_the_way" */}
+        {displayStatus === 'on_the_way' && (
+          <Card style={{ ...styles.section, backgroundColor: tokens.colors.warning + '10' }}>
+            <Typography variant="h3" style={styles.sectionTitle}>
+              Arrival Window
+            </Typography>
+            <Typography variant="body">
+              {arrivalWindow
+                ? formatTimeWindow(arrivalWindow.start, arrivalWindow.end)
+                : formatTimeWindow(
+                    appointment.arrivalWindowStart,
+                    appointment.arrivalWindowEnd,
+                  )}
+            </Typography>
+            <Typography
+              variant="bodySmall"
+              color={tokens.colors.textSecondary}
+              style={{ marginTop: 4 }}
+            >
+              Your {resolve('{{Provider}}')} is on the way
+            </Typography>
+          </Card>
+        )}
+
+        {/* Completion Summary — shown when status is "completed" */}
+        {displayStatus === 'completed' && (
+          <Card style={{ ...styles.section, backgroundColor: tokens.colors.success + '10' }}>
+            <Typography variant="h3" style={styles.sectionTitle}>
+              Service Completed
+            </Typography>
+            <View style={styles.detailRow}>
+              <Typography
+                variant="bodySmall"
+                color={tokens.colors.textSecondary}
+              >
+                Service Type
+              </Typography>
+              <Typography variant="body">
+                {appointment.serviceType}
+              </Typography>
+            </View>
+            <View style={styles.detailRow}>
+              <Typography
+                variant="bodySmall"
+                color={tokens.colors.textSecondary}
+              >
+                Date
+              </Typography>
+              <Typography variant="body">
+                {formatDate(appointment.date)}
+              </Typography>
+            </View>
+            <View style={styles.detailRow}>
+              <Typography
+                variant="bodySmall"
+                color={tokens.colors.textSecondary}
+              >
+                {resolve('{{Provider}}')}
+              </Typography>
+              <Typography variant="body">
+                {appointment.providerName}
+              </Typography>
+            </View>
+          </Card>
+        )}
 
         {/* Appointment Details */}
         <Card style={styles.section}>
@@ -302,6 +401,12 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   sectionTitle: {
+    marginBottom: 12,
+  },
+  statusHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 12,
   },
   detailRow: {

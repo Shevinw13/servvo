@@ -11,6 +11,13 @@ import { PropertiesModule } from './modules/properties/properties.module';
 import { BusinessesModule } from './modules/businesses/businesses.module';
 import { MediaModule } from './modules/media/media.module';
 import { AppointmentsModule } from './modules/appointments/appointments.module';
+import { ServiceStatusModule } from './modules/service-status/service-status.module';
+import { MessagesModule } from './modules/messages/messages.module';
+import { InvoicesModule } from './modules/invoices/invoices.module';
+import { PaymentsModule } from './modules/payments/payments.module';
+import { ReviewsModule } from './modules/reviews/reviews.module';
+import { BookingsModule } from './modules/bookings/bookings.module';
+import { NotificationsModule } from './modules/notifications/notifications.module';
 
 @Module({
   imports: [
@@ -27,6 +34,13 @@ import { AppointmentsModule } from './modules/appointments/appointments.module';
     BusinessesModule,
     MediaModule,
     AppointmentsModule,
+    ServiceStatusModule,
+    MessagesModule,
+    InvoicesModule,
+    PaymentsModule,
+    ReviewsModule,
+    BookingsModule,
+    NotificationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

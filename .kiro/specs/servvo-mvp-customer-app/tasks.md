@@ -148,7 +148,7 @@ This plan implements the Servvo MVP Customer App — a white-label mobile experi
     - **Property 6: Activity Feed Recency**
     - **Validates: Requirements 4.1, 4.4**
 
-- [x] 8. Appointment management
+- [-] 8. Appointment management
   - [x] 8.1 Implement backend appointments module
     - Create appointments module with `GET /appointments` (pagination, upcoming/past filter), `GET /appointments/:id`, `POST /appointments/:id/reschedule`, `POST /appointments/:id/cancel`, `GET /appointments/next`
     - Implement time-based partitioning logic (upcoming vs past based on scheduled_date)
@@ -173,8 +173,8 @@ This plan implements the Servvo MVP Customer App — a white-label mobile experi
     - For any set of appointments, upcoming/past split is correct and exhaustive
     - **Validates: Requirements 5.1**
 
-- [ ] 9. Service status tracking (real-time)
-  - [ ] 9.1 Implement backend service-status module with WebSocket gateway
+- [x] 9. Service status tracking (real-time)
+  - [x] 9.1 Implement backend service-status module with WebSocket gateway
     - Create service-status module with `GET /appointments/:id/status`
     - Implement NestJS WebSocket gateway with Socket.IO
     - Handle `subscribe:appointment` / `unsubscribe:appointment` client events
@@ -182,7 +182,7 @@ This plan implements the Servvo MVP Customer App — a white-label mobile experi
     - Implement Twilio webhook endpoint for SMS-based status updates from providers
     - _Requirements: 6.1, 6.2, 6.4_
 
-  - [ ] 9.2 Implement frontend WebSocket service and status components
+  - [x] 9.2 Implement frontend WebSocket service and status components
     - Create `services/websocket.service.ts` with auto-reconnect (exponential backoff)
     - Create `hooks/useWebSocket.ts`
     - Create `StatusProgressBar.tsx` showing stage progression
@@ -196,17 +196,17 @@ This plan implements the Servvo MVP Customer App — a white-label mobile experi
     - For any valid ServiceStatus, progress bar marks preceding stages completed and current as active
     - **Validates: Requirements 6.1**
 
-- [ ] 10. Checkpoint - Ensure all tests pass
+- [x] 10. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 11. Two-way messaging
-  - [ ] 11.1 Implement backend messages module
+- [x] 11. Two-way messaging
+  - [x] 11.1 Implement backend messages module
     - Create messages module with `GET /messages` (pagination), `POST /messages`
     - Implement WebSocket `message:new` event emission
     - Implement automated message generation on status change events
     - _Requirements: 7.1, 7.2, 7.3, 7.4_
 
-  - [ ] 11.2 Implement frontend messaging screen and components
+  - [x] 11.2 Implement frontend messaging screen and components
     - Create `MessagesScreen.tsx` with conversation thread
     - Create `MessageBubble.tsx` (customer vs business vs system styling)
     - Create `MessageInput.tsx` with send button
@@ -220,14 +220,14 @@ This plan implements the Servvo MVP Customer App — a white-label mobile experi
     - **Property 10: Automated Message Generation from Status Changes**
     - **Validates: Requirements 7.2, 7.4**
 
-- [ ] 12. Billing and payments
-  - [ ] 12.1 Implement backend invoices and payments modules
+- [x] 12. Billing and payments
+  - [x] 12.1 Implement backend invoices and payments modules
     - Create invoices module with `GET /invoices` (status filter, pagination), `GET /invoices/:id`
     - Create payments module with `POST /payments/intent`, `POST /payments/confirm`, `GET /payments/methods`, `POST /payments/methods`, `DELETE /payments/methods/:id`, `GET /payments/history`
     - Integrate Stripe SDK for PaymentIntent creation and confirmation
     - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5, 8.6_
 
-  - [ ] 12.2 Implement frontend billing screens and components
+  - [x] 12.2 Implement frontend billing screens and components
     - Create `BillingScreen.tsx` with invoice list and payment history tabs
     - Create `InvoiceCard.tsx` component
     - Create `InvoiceDetailScreen.tsx` with payment action
@@ -241,8 +241,8 @@ This plan implements the Servvo MVP Customer App — a white-label mobile experi
     - For any invoice/payment, rendered list item contains all required fields
     - **Validates: Requirements 8.1, 8.6**
 
-- [ ] 13. Service history and property timeline
-  - [ ] 13.1 Implement service history frontend
+- [x] 13. Service history and property timeline
+  - [x] 13.1 Implement service history frontend
     - Create `ServiceTimeline.tsx` component for property timeline view
     - Add service history tab/section to profile or dedicated screen
     - Display chronological list of past services with details, photos, provider notes
@@ -255,13 +255,13 @@ This plan implements the Servvo MVP Customer App — a white-label mobile experi
     - **Property 13: Service Type Filtering**
     - **Validates: Requirements 9.1, 9.5**
 
-- [ ] 14. Reviews and ratings
-  - [ ] 14.1 Implement backend reviews module
+- [x] 14. Reviews and ratings
+  - [x] 14.1 Implement backend reviews module
     - Create reviews module with `POST /reviews`, `GET /reviews`, `GET /appointments/:id/review`
     - Validate rating 1-5, reject out-of-range
     - _Requirements: 10.2, 10.3, 10.5_
 
-  - [ ] 14.2 Implement frontend review flow
+  - [x] 14.2 Implement frontend review flow
     - Create `ReviewFlowScreen.tsx` with star rating (1-5) and optional comment
     - Show thank-you confirmation on submit
     - Allow access to review from service history
@@ -273,12 +273,12 @@ This plan implements the Servvo MVP Customer App — a white-label mobile experi
     - For any rating 1-5, system accepts. For any rating outside 1-5, system rejects.
     - **Validates: Requirements 10.3**
 
-- [ ] 15. Rebooking and service requests
-  - [ ] 15.1 Implement backend bookings module
+- [x] 15. Rebooking and service requests
+  - [x] 15.1 Implement backend bookings module
     - Create bookings module with `GET /bookings/available-dates`, `GET /bookings/available-windows`, `POST /bookings`, `GET /bookings/recommendations`
     - _Requirements: 11.2, 11.3, 11.4, 11.5_
 
-  - [ ] 15.2 Implement frontend rebooking screen
+  - [x] 15.2 Implement frontend rebooking screen
     - Create `RebookingScreen.tsx` with calendar date picker, time window selection
     - Pre-populate service type from past service when rebooking
     - Show booking confirmation on submit
@@ -290,14 +290,14 @@ This plan implements the Servvo MVP Customer App — a white-label mobile experi
     - For any past service selected for rebooking, form pre-populates with that service_type
     - **Validates: Requirements 11.1**
 
-- [ ] 16. Push notifications
-  - [ ] 16.1 Implement backend notifications module
+- [x] 16. Push notifications
+  - [x] 16.1 Implement backend notifications module
     - Create notifications module with `POST /notifications/register-device`, `GET /notifications/preferences`, `PUT /notifications/preferences`
     - Implement Bull queue consumers for FCM push delivery
     - Trigger notifications on: status changes, new messages, invoice reminders, review requests, appointment confirmations
     - _Requirements: 12.1, 12.2, 12.4_
 
-  - [ ] 16.2 Implement frontend notification handling
+  - [x] 16.2 Implement frontend notification handling
     - Create `hooks/useNotifications.ts` for permission request and device token registration
     - Implement deep-link routing from notification tap to relevant screen
     - Create `NotificationPrefsScreen.tsx` for category enable/disable toggles
@@ -309,32 +309,32 @@ This plan implements the Servvo MVP Customer App — a white-label mobile experi
     - For any notification type, tapping navigates to the correct corresponding screen
     - **Validates: Requirements 12.3**
 
-- [ ] 17. Profile and settings
-  - [ ] 17.1 Implement ProfileScreen and logout
+- [x] 17. Profile and settings
+  - [x] 17.1 Implement ProfileScreen and logout
     - Create `ProfileScreen.tsx` with profile info display, edit capability
     - Implement logout flow (clear session, navigate to welcome)
     - Link to NotificationPrefsScreen
     - _Requirements: 13.3, 12.4_
 
-- [ ] 18. Premium visual polish and error handling
-  - [ ] 18.1 Implement global error boundary and error handling patterns
+- [x] 18. Premium visual polish and error handling
+  - [x] 18.1 Implement global error boundary and error handling patterns
     - Create React error boundary with friendly fallback UI and "Try Again" button
     - Implement offline banner and network error handling
     - Implement toast notifications for API errors
     - _Requirements: 14.4_
 
-  - [ ] 18.2 Implement screen transitions and animations
+  - [x] 18.2 Implement screen transitions and animations
     - Add smooth navigation transitions between screens
     - Add loading states and skeleton screens
     - Ensure premium feel with consistent spacing, shadows, and typography
     - _Requirements: 14.1, 14.4_
 
-  - [ ] 18.3 Implement BrandedHeader and BrandedLogo components
+  - [x] 18.3 Implement BrandedHeader and BrandedLogo components
     - Create `BrandedHeader.tsx` displaying business logo
     - Create `BrandedLogo.tsx` for onboarding and splash
     - _Requirements: 3.2, 14.1_
 
-- [ ] 19. Final checkpoint - Ensure all tests pass
+- [x] 19. Final checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes
