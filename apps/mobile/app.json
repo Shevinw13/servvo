@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "Servvo",
+    "slug": "servvo-customer-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1B365D"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.servvo.customerapp"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1B365D"
+      },
+      "package": "com.servvo.customerapp"
+    },
+    "plugins": ["expo-router", "expo-secure-store"],
+    "scheme": "servvo"
+  }
+}

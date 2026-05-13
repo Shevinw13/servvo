@@ -6,49 +6,49 @@ This plan implements the Servvo MVP Customer App — a white-label mobile experi
 
 ## Tasks
 
-- [ ] 1. Project scaffolding and shared infrastructure
-  - [ ] 1.1 Initialize Expo (TypeScript) project and NestJS backend monorepo structure
+- [x] 1. Project scaffolding and shared infrastructure
+  - [x] 1.1 Initialize Expo (TypeScript) project and NestJS backend monorepo structure
     - Create Expo app with TypeScript template under `apps/mobile`
     - Create NestJS app under `apps/backend`
     - Configure shared tsconfig paths and workspace scripts
     - _Requirements: 14.5_
 
-  - [ ] 1.2 Set up database configuration, TypeORM, and initial migration
+  - [x] 1.2 Set up database configuration, TypeORM, and initial migration
     - Configure TypeORM with PostgreSQL connection (env-based)
     - Create initial migration with all tables from the design schema: businesses, brand_configs, users, properties, appointments, service_status_events, messages, invoices, payments, payment_methods, reviews, service_photos, device_tokens, notification_preferences
     - Define all entity classes with relations
     - _Requirements: 2.1, 5.1, 6.1, 7.1, 8.1, 9.1, 10.1, 11.1, 12.1, 13.1_
 
-  - [ ] 1.3 Set up Redis connection and Bull queue module
+  - [x] 1.3 Set up Redis connection and Bull queue module
     - Configure Redis client for caching and pub/sub
     - Set up Bull queue for notification jobs
     - _Requirements: 6.2, 12.2_
 
-  - [ ] 1.4 Set up testing infrastructure
+  - [x] 1.4 Set up testing infrastructure
     - Configure Jest for backend unit and integration tests
     - Configure Jest + React Native Testing Library for mobile
     - Install and configure fast-check for property-based tests
     - Create test directory structure: tests/properties, tests/unit, tests/integration
     - _Requirements: All_
 
-- [ ] 2. Design system and branding layer
-  - [ ] 2.1 Implement design tokens and default theme
+- [x] 2. Design system and branding layer
+  - [x] 2.1 Implement design tokens and default theme
     - Create `theme/tokens.ts` with colors, spacing, borderRadius, shadows, typography from design
     - Create `theme/defaultTheme.ts` with fallback values
     - _Requirements: 14.1, 14.2_
 
-  - [ ] 2.2 Implement BrandThemeProvider and brand config store
+  - [x] 2.2 Implement BrandThemeProvider and brand config store
     - Create Zustand `brandStore.ts` to hold BrandConfig
     - Create `BrandThemeProvider.tsx` that merges brand colors/terminology into theme context
     - Implement `useBrandConfig` hook
     - _Requirements: 3.1, 3.3, 3.5_
 
-  - [ ] 2.3 Implement UI primitives (Card, Button, Input, Badge, Avatar, Typography)
+  - [x] 2.3 Implement UI primitives (Card, Button, Input, Badge, Avatar, Typography)
     - Build each component using theme tokens
     - Ensure large cards, soft shadows, rounded corners, generous whitespace per design spec
     - _Requirements: 14.1, 14.2_
 
-  - [ ] 2.4 Implement terminology resolver utility
+  - [x] 2.4 Implement terminology resolver utility
     - Create `utils/terminology.ts` that resolves Service_Professional references from brand config
     - _Requirements: 3.4_
 
@@ -57,28 +57,28 @@ This plan implements the Servvo MVP Customer App — a white-label mobile experi
     - For any valid brand config, resolved theme tokens reflect configured colors and terminology
     - **Validates: Requirements 3.3, 3.4**
 
-- [ ] 3. Authentication module (backend + frontend)
-  - [ ] 3.1 Implement backend auth module with Firebase token verification
+- [x] 3. Authentication module (backend + frontend)
+  - [x] 3.1 Implement backend auth module with Firebase token verification
     - Create auth module with `POST /auth/verify-token`, `POST /auth/logout`, `GET /auth/session`
     - Implement Firebase Admin SDK token verification
     - Create JWT session token issuance (30-day expiry)
     - Implement AuthGuard for protected routes
     - _Requirements: 1.2, 13.1, 13.4_
 
-  - [ ] 3.2 Implement frontend auth flow screens (Welcome, PhoneInput, OTP)
+  - [x] 3.2 Implement frontend auth flow screens (Welcome, PhoneInput, OTP)
     - Create `WelcomeScreen.tsx` with branded splash
     - Create `PhoneInputScreen.tsx` with phone number validation and Firebase phone auth trigger
     - Create `OTPScreen.tsx` with code input, 5-minute timer, resend logic
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5_
 
-  - [ ] 3.3 Implement auth store, auth service, and API client with interceptor
+  - [x] 3.3 Implement auth store, auth service, and API client with interceptor
     - Create Zustand `authStore.ts` for token/session state
     - Create `services/auth.service.ts` for Firebase + backend auth calls
     - Create `services/api.ts` Axios instance with auth token interceptor and 401 redirect
     - Implement secure token storage (expo-secure-store)
     - _Requirements: 13.1, 13.3, 13.4_
 
-  - [ ] 3.4 Implement AuthStack navigation
+  - [x] 3.4 Implement AuthStack navigation
     - Create `navigation/AuthStack.tsx` routing Welcome → PhoneInput → OTP
     - Handle auth state to skip auth if session valid
     - _Requirements: 1.2, 13.1_
@@ -89,26 +89,26 @@ This plan implements the Servvo MVP Customer App — a white-label mobile experi
     - **Property 17: Session Time Validity**
     - **Validates: Requirements 1.2, 1.4, 1.5, 13.1**
 
-- [ ] 4. Checkpoint - Ensure all tests pass
+- [x] 4. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 5. Onboarding flow
-  - [ ] 5.1 Implement backend users module with onboarding endpoints
+- [x] 5. Onboarding flow
+  - [x] 5.1 Implement backend users module with onboarding endpoints
     - Create users module with `GET /users/me`, `PUT /users/me`, `POST /users/me/onboarding`, `GET /users/me/onboarding-status`
     - Implement validation: name and address required, reject empty/whitespace
     - _Requirements: 2.1, 2.2, 2.3, 2.4_
 
-  - [ ] 5.2 Implement backend properties module
+  - [x] 5.2 Implement backend properties module
     - Create properties module with `GET /properties`, `POST /properties`, `PUT /properties/:id`
     - _Requirements: 2.3, 9.1_
 
-  - [ ] 5.3 Implement frontend onboarding screens
+  - [x] 5.3 Implement frontend onboarding screens
     - Create `ProfileSetupScreen.tsx` (name, email fields)
     - Create `PropertySetupScreen.tsx` (address, property details)
     - Create `ConfirmationScreen.tsx` with success state
     - _Requirements: 2.1, 2.2, 2.3, 2.5_
 
-  - [ ] 5.4 Implement OnboardingStack navigation
+  - [x] 5.4 Implement OnboardingStack navigation
     - Create `navigation/OnboardingStack.tsx` routing Profile → Property → Confirmation → Dashboard
     - Gate main app behind onboarding completion check
     - _Requirements: 2.1, 2.5_
@@ -118,24 +118,24 @@ This plan implements the Servvo MVP Customer App — a white-label mobile experi
     - For any submission with empty/null/whitespace name or address, system rejects with validation error
     - **Validates: Requirements 2.4**
 
-- [ ] 6. Business branding backend
-  - [ ] 6.1 Implement backend businesses module
+- [x] 6. Business branding backend
+  - [x] 6.1 Implement backend businesses module
     - Create businesses module with `GET /businesses/:id/brand-config`
     - Implement brand config caching in Redis
     - Return default branding as fallback when config unavailable
     - _Requirements: 3.1, 3.2, 3.5_
 
-  - [ ] 6.2 Implement backend media module
+  - [x] 6.2 Implement backend media module
     - Create media module with `GET /media/:key` for signed S3 URL generation
     - _Requirements: 3.2, 9.3_
 
-- [ ] 7. Home dashboard
-  - [ ] 7.1 Implement MainTabNavigator
+- [x] 7. Home dashboard
+  - [x] 7.1 Implement MainTabNavigator
     - Create `navigation/MainTabNavigator.tsx` with Home, Appointments, Messages, Billing, Profile tabs
     - Apply branded tab bar styling
     - _Requirements: 4.1, 14.1_
 
-  - [ ] 7.2 Implement DashboardScreen
+  - [x] 7.2 Implement DashboardScreen
     - Build next upcoming service card (service type, date, arrival window, provider name)
     - Display current service status with StatusProgressBar component
     - Build quick action buttons (message, pay invoice, book again, view history)
@@ -148,13 +148,13 @@ This plan implements the Servvo MVP Customer App — a white-label mobile experi
     - **Property 6: Activity Feed Recency**
     - **Validates: Requirements 4.1, 4.4**
 
-- [ ] 8. Appointment management
-  - [ ] 8.1 Implement backend appointments module
+- [x] 8. Appointment management
+  - [x] 8.1 Implement backend appointments module
     - Create appointments module with `GET /appointments` (pagination, upcoming/past filter), `GET /appointments/:id`, `POST /appointments/:id/reschedule`, `POST /appointments/:id/cancel`, `GET /appointments/next`
     - Implement time-based partitioning logic (upcoming vs past based on scheduled_date)
     - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
 
-  - [ ] 8.2 Implement frontend appointment screens
+  - [x] 8.2 Implement frontend appointment screens
     - Create `AppointmentsScreen.tsx` with Upcoming/Past tabs
     - Create `AppointmentCard.tsx` component
     - Create `AppointmentDetailScreen.tsx` with full details and status
@@ -162,7 +162,7 @@ This plan implements the Servvo MVP Customer App — a white-label mobile experi
     - Implement cancel confirmation flow
     - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
 
-  - [ ] 8.3 Implement appointment Zustand store and service layer
+  - [x] 8.3 Implement appointment Zustand store and service layer
     - Create `stores/appointmentStore.ts`
     - Create `services/appointments.service.ts`
     - Create `hooks/useAppointments.ts`
