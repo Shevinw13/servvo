@@ -61,7 +61,7 @@ export function PropertySnapshot({ healthStatus, lastServiceDate, currentMonth }
   return (
     <View style={rowStyle}>
       {/* Health Card */}
-      <View style={cardStyle}>
+      <View style={[cardStyle, { backgroundColor: 'rgba(31, 90, 31, 0.04)' }]}>
         <View style={iconStyle}>
           <Feather name="feather" size={18} color={HEALTH_COLORS[healthStatus]} />
         </View>

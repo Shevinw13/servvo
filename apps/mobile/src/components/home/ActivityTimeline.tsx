@@ -108,7 +108,7 @@ function TimelineItem({ event, isLast, tokens }: TimelineItemProps) {
   const lineStyle: ViewStyle = {
     width: 2,
     flex: 1,
-    backgroundColor: tokens.colors.border,
+    backgroundColor: '#F0EDE8',
     marginTop: 4,
   };
 

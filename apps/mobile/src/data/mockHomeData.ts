@@ -5,12 +5,12 @@ export const mockUser = {
 
 export const mockAppointment = {
   id: '1',
-  date: 'Wed, May 22',
+  date: 'Wednesday, May 22',
   time: '8:00 AM',
   serviceType: 'Weekly Lawn Mowing',
-  providerName: 'Marcus J.',
-  providerAvatarUri: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80',
-  status: 'confirmed' as const,
+  providerName: 'Joe L.',
+  providerAvatarUri: 'https://media.licdn.com/dms/image/v2/D4E03AQE1gDVudB1VsQ/profile-displayphoto-scale_400_400/B4EZvRdKuqJUAg-/0/1768745643528?e=2147483647&v=beta&t=MI9KbDg3zFleMKSzx0SM0OfwrD4JR3YXjQ0-7dWOw4w',
+  status: 'scheduled' as const,
 };
 
 export const mockEvents = [

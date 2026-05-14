@@ -35,22 +35,22 @@ export function HeroSection({ imageUri, firstName }: HeroSectionProps) {
     bottom: 0,
     left: 0,
     right: 0,
-    height: 180,
+    height: 200,
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 24,
   };
 
   const greetingContainerStyle: ViewStyle = {
     position: 'absolute',
-    bottom: 32,
+    bottom: 44,
     left: 20,
     right: 20,
   };
 
   const greetingTextStyle: TextStyle = {
-    textShadowColor: 'rgba(0,0,0,0.6)',
+    textShadowColor: 'rgba(0,0,0,0.7)',
     textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 6,
+    textShadowRadius: 8,
   };
 
   return (
@@ -61,11 +61,11 @@ export function HeroSection({ imageUri, firstName }: HeroSectionProps) {
         contentFit="cover"
       />
       <LinearGradient
-        colors={['transparent', 'rgba(0,0,0,0.05)', 'rgba(0,0,0,0.3)', 'rgba(0,0,0,0.7)']}
+        colors={['transparent', 'rgba(0,0,0,0.03)', 'rgba(0,0,0,0.25)', 'rgba(0,0,0,0.65)']}
         style={gradientStyle}
       />
       <View style={greetingContainerStyle}>
-        <Typography variant="display" color="#FFFFFF" style={greetingTextStyle}>
+        <Typography variant="h1" color="#FFFFFF" style={greetingTextStyle}>
           {greeting}
         </Typography>
       </View>

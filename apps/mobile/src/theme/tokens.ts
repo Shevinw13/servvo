@@ -6,24 +6,24 @@
 
 export const defaultTokens = {
   colors: {
-    primary: '#2D4A2D', // Dark forest green
-    primaryLight: '#3D6B3D', // Lighter forest green
-    accent: '#5C8A4D', // Sage/olive green
-    accentLight: '#8FB87A', // Light sage
-    background: '#FAFAF5', // Warm cream/off-white
+    primary: '#1F3D1F', // Deep rich forest green
+    primaryLight: '#2D5A2D', // Lighter forest green
+    accent: '#4A7A3D', // Rich sage green
+    accentLight: '#7BAF6A', // Warm light sage
+    background: '#F9F8F4', // Warm ivory
     surface: '#FFFFFF', // White cards
-    surfaceElevated: '#FFFFFF',
+    surfaceElevated: '#FEFEFE',
     text: '#1A1A1A', // Near black
-    textSecondary: '#5C5C5C', // Dark gray
-    textMuted: '#8C8C8C', // Medium gray
-    border: '#E8E5E0', // Warm light border
-    error: '#C53030', // Muted red
-    success: '#2D6A2D', // Forest green (same family as primary)
-    warning: '#B7791F', // Warm amber
+    textSecondary: '#4A4A4A', // Darker secondary for better contrast
+    textMuted: '#7A7A7A', // Softer muted
+    border: '#E6E2DC', // Warmer border
+    error: '#B83030', // Deeper red
+    success: '#1F5A1F', // Deep forest success
+    warning: '#9A6B1A', // Richer amber
   },
   gradients: {
-    heroOverlay: ['transparent', 'rgba(250, 250, 245, 0.0)', 'rgba(250, 250, 245, 0.85)', '#FAFAF5'],
-    buttonPrimary: ['#2D4A2D', '#264026'],
+    heroOverlay: ['transparent', 'rgba(249, 248, 244, 0.0)', 'rgba(249, 248, 244, 0.85)', '#F9F8F4'],
+    buttonPrimary: ['#1F3D1F', '#1A331A'],
   },
   spacing: {
     xs: 4,
@@ -62,7 +62,7 @@ export const defaultTokens = {
   },
   typography: {
     display: { fontSize: 36, fontWeight: '700' as const, lineHeight: 44 },
-    h1: { fontSize: 32, fontWeight: '700' as const, lineHeight: 40 },
+    h1: { fontSize: 32, fontWeight: '600' as const, lineHeight: 40 },
     h2: { fontSize: 24, fontWeight: '600' as const, lineHeight: 32 },
     h3: { fontSize: 18, fontWeight: '600' as const, lineHeight: 24 },
     subtitle: { fontSize: 14, fontWeight: '600' as const, lineHeight: 20, letterSpacing: 0.5 },

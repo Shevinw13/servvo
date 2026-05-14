@@ -1,7 +1,7 @@
 /**
- * DashboardScreen — Redesigned premium home screen.
- * Hero section with parallax layering, next service card, property snapshot,
- * quick actions, and activity timeline. Loading skeleton with crossfade.
+ * DashboardScreen — Premium immersive home screen.
+ * Hero → Floating Service Card → Property Insights → Activity Feed.
+ * No quick actions. Calm, property-centric, emotionally sophisticated.
  */
 
 import React, { useCallback, useEffect, useState } from 'react';
@@ -14,10 +14,10 @@ import Animated, {
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '@/theme/BrandThemeProvider';
 import { useAuthStore } from '@/stores/authStore';
+import { Typography } from '@/components/ui';
 import { HeroSection } from '@/components/home/HeroSection';
 import { NextServiceCard } from '@/components/home/NextServiceCard';
 import { PropertySnapshot } from '@/components/home/PropertySnapshot';
-import { QuickActions, QuickActionItem } from '@/components/home/QuickActions';
 import { ActivityTimeline } from '@/components/home/ActivityTimeline';
 import { HomeScreenSkeleton } from '@/components/home/HomeScreenSkeleton';
 import { mockUser, mockAppointment, mockEvents, mockProperty } from '@/data/mockHomeData';
@@ -32,13 +32,11 @@ export function DashboardScreen() {
   const skeletonOpacity = useSharedValue(1);
 
   useEffect(() => {
-    // Simulate data loading
     const timer = setTimeout(() => {
       setIsLoading(false);
-      skeletonOpacity.value = withTiming(0, { duration: 200 });
-      contentOpacity.value = withTiming(1, { duration: 200 });
+      skeletonOpacity.value = withTiming(0, { duration: 250 });
+      contentOpacity.value = withTiming(1, { duration: 300 });
     }, 800);
-
     return () => clearTimeout(timer);
   }, [contentOpacity, skeletonOpacity]);
 
@@ -54,40 +52,13 @@ export function DashboardScreen() {
   const propertyImageUri = mockUser.propertyImageUri;
   const currentMonth = new Date().getMonth() + 1;
 
-  const quickActions: QuickActionItem[] = [
-    {
-      id: 'book',
-      icon: 'plus-circle',
-      label: 'Book Service',
-      onPress: () => navigation.navigate('Schedule'),
-    },
-    {
-      id: 'payments',
-      icon: 'credit-card',
-      label: 'Payments',
-      onPress: () => navigation.navigate('Account'),
-    },
-    {
-      id: 'contact',
-      icon: 'phone',
-      label: 'Contact Team',
-      onPress: () => navigation.navigate('Messages'),
-    },
-    {
-      id: 'quote',
-      icon: 'file-text',
-      label: 'Request Quote',
-      onPress: () => navigation.navigate('Schedule'),
-    },
-  ];
-
   const handleServiceCardPress = useCallback(() => {
     navigation.navigate('Schedule');
   }, [navigation]);
 
   return (
     <View style={[styles.screen, { backgroundColor: tokens.colors.background }]}>
-      {/* Hero Section - absolute positioned */}
+      {/* Hero Section - absolute positioned, immersive */}
       <HeroSection imageUri={propertyImageUri} firstName={firstName} />
 
       {/* Loading Skeleton */}
@@ -104,19 +75,26 @@ export function DashboardScreen() {
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
-          {/* Spacer for hero overlap */}
+          {/* Spacer for hero */}
           <View style={styles.heroSpacer} />
 
-          {/* Next Service Card */}
-          <View style={styles.section}>
+          {/* Floating Service Card */}
+          <View style={styles.cardSection}>
             <NextServiceCard
               appointment={mockAppointment}
               onPress={handleServiceCardPress}
             />
           </View>
 
-          {/* Property Snapshot */}
-          <View style={styles.section}>
+          {/* Property Insights */}
+          <View style={styles.insightSection}>
+            <Typography
+              variant="subtitle"
+              color={tokens.colors.textSecondary}
+              style={styles.sectionLabel}
+            >
+              YOUR PROPERTY
+            </Typography>
             <PropertySnapshot
               healthStatus={mockProperty.healthStatus}
               lastServiceDate={mockProperty.lastServiceDate}
@@ -124,14 +102,16 @@ export function DashboardScreen() {
             />
           </View>
 
-          {/* Quick Actions */}
-          <View style={styles.section}>
-            <QuickActions actions={quickActions} />
-          </View>
-
-          {/* Activity Timeline */}
-          <View style={styles.section}>
-            <ActivityTimeline events={mockEvents} />
+          {/* Activity Feed */}
+          <View style={styles.activitySection}>
+            <Typography
+              variant="subtitle"
+              color={tokens.colors.textSecondary}
+              style={styles.sectionLabel}
+            >
+              RECENT ACTIVITY
+            </Typography>
+            <ActivityTimeline events={mockEvents.slice(0, 4)} />
           </View>
         </ScrollView>
       </Animated.View>
@@ -155,13 +135,25 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingBottom: 40,
+    paddingBottom: 48,
   },
   heroSpacer: {
-    height: 220,
+    height: 260,
   },
-  section: {
+  cardSection: {
+    paddingHorizontal: 20,
+    marginBottom: 36,
+  },
+  insightSection: {
+    paddingHorizontal: 20,
+    marginBottom: 36,
+  },
+  activitySection: {
     paddingHorizontal: 20,
     marginBottom: 24,
+  },
+  sectionLabel: {
+    marginBottom: 14,
+    letterSpacing: 1,
   },
 });
