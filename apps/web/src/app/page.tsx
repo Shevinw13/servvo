@@ -1,10 +1,24 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useBrandConfig } from '@/hooks/useBrandConfig';
+
 export default function Home() {
+  const router = useRouter();
+  const { isOnboarded } = useBrandConfig();
+
+  useEffect(() => {
+    if (isOnboarded) {
+      router.replace('/dashboard');
+    } else {
+      router.replace('/onboarding');
+    }
+  }, [isOnboarded, router]);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8">
-      <h1 className="text-4xl font-bold text-foreground">Servvo Business Platform</h1>
-      <p className="mt-4 text-lg text-muted-foreground">
-        White-label management for lawn care professionals
-      </p>
-    </main>
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+    </div>
   );
 }

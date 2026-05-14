@@ -1,0 +1,13 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js",
+  "/(platform)/dashboard/page": "app/(platform)/dashboard/page.js",
+  "/(platform)/analytics/page": "app/(platform)/analytics/page.js",
+  "/(platform)/branding/page": "app/(platform)/branding/page.js",
+  "/(platform)/integrations/page": "app/(platform)/integrations/page.js",
+  "/(platform)/customers/page": "app/(platform)/customers/page.js",
+  "/(platform)/notifications/page": "app/(platform)/notifications/page.js",
+  "/(platform)/settings/page": "app/(platform)/settings/page.js",
+  "/(platform)/customer-experience/page": "app/(platform)/customer-experience/page.js",
+  "/(onboarding)/onboarding/page": "app/(onboarding)/onboarding/page.js"
+}
