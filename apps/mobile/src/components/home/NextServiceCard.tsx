@@ -40,11 +40,12 @@ export function NextServiceCard({ appointment, onPress }: NextServiceCardProps) 
     backgroundColor: tokens.colors.surfaceElevated,
     borderRadius: 16,
     padding: tokens.spacing.lg,
+    marginTop: -20,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 8 },
-    shadowRadius: 24,
-    shadowOpacity: 0.12,
-    elevation: 8,
+    shadowOffset: { width: 0, height: 12 },
+    shadowRadius: 28,
+    shadowOpacity: 0.14,
+    elevation: 10,
   };
 
   const avatarBorderStyle: ViewStyle = {

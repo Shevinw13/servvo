@@ -54,10 +54,10 @@ export const defaultTokens = {
       shadowOpacity: 0.08,
     },
     lg: {
-      elevation: 8,
-      shadowOffset: { width: 0, height: 8 },
-      shadowRadius: 24,
-      shadowOpacity: 0.12,
+      elevation: 10,
+      shadowOffset: { width: 0, height: 10 },
+      shadowRadius: 28,
+      shadowOpacity: 0.14,
     },
   },
   typography: {

@@ -97,9 +97,9 @@ function TimelineItem({ event, isLast, tokens }: TimelineItemProps) {
   };
 
   const iconCircleStyle: ViewStyle = {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
+    width: 28,
+    height: 28,
+    borderRadius: 14,
     backgroundColor: isCompleted ? 'rgba(45, 106, 45, 0.12)' : 'rgba(140, 140, 140, 0.12)',
     alignItems: 'center',
     justifyContent: 'center',
@@ -115,7 +115,7 @@ function TimelineItem({ event, isLast, tokens }: TimelineItemProps) {
   const contentStyle: ViewStyle = {
     flex: 1,
     marginLeft: 12,
-    paddingBottom: isLast ? 0 : 16,
+    paddingBottom: isLast ? 0 : 20,
   };
 
   return (
@@ -124,7 +124,7 @@ function TimelineItem({ event, isLast, tokens }: TimelineItemProps) {
         <View style={iconCircleStyle}>
           <Feather
             name={isCompleted ? 'check' : 'clock'}
-            size={12}
+            size={14}
             color={isCompleted ? tokens.colors.success : tokens.colors.textMuted}
           />
         </View>

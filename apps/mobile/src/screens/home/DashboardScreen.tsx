@@ -56,27 +56,27 @@ export function DashboardScreen() {
 
   const quickActions: QuickActionItem[] = [
     {
-      id: 'track',
-      icon: 'navigation',
-      label: 'Track Service',
-      onPress: () => navigation.navigate('Schedule'),
-    },
-    {
-      id: 'message',
-      icon: 'message-circle',
-      label: 'Message',
-      onPress: () => navigation.navigate('Messages'),
-    },
-    {
-      id: 'property',
-      icon: 'home',
-      label: 'My Property',
-      onPress: () => navigation.navigate('Account'),
-    },
-    {
       id: 'book',
       icon: 'plus-circle',
       label: 'Book Service',
+      onPress: () => navigation.navigate('Schedule'),
+    },
+    {
+      id: 'payments',
+      icon: 'credit-card',
+      label: 'Payments',
+      onPress: () => navigation.navigate('Account'),
+    },
+    {
+      id: 'contact',
+      icon: 'phone',
+      label: 'Contact Team',
+      onPress: () => navigation.navigate('Messages'),
+    },
+    {
+      id: 'quote',
+      icon: 'file-text',
+      label: 'Request Quote',
       onPress: () => navigation.navigate('Schedule'),
     },
   ];
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   heroSpacer: {
-    height: 240,
+    height: 220,
   },
   section: {
     paddingHorizontal: 20,

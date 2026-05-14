@@ -6,6 +6,7 @@ apps/backend/dist/
 apps/mobile/.expo/
 apps/mobile/ios/build/
 apps/mobile/android/app/build/
+apps/web/.next/
 
 # Environment files
 .env

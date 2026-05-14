@@ -36,12 +36,13 @@ export function PropertySnapshot({ healthStatus, lastServiceDate, currentMonth }
     flex: 1,
     backgroundColor: tokens.colors.surfaceElevated,
     borderRadius: 12,
-    padding: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 14,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
-    shadowOpacity: 0.06,
-    elevation: 2,
+    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 8,
+    shadowOpacity: 0.07,
+    elevation: 3,
   };
 
   const iconStyle: ViewStyle = {
