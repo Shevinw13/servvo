@@ -28,6 +28,7 @@ export const defaultTheme: Theme = {
 /**
  * Merges a BrandConfig into the default theme, overriding primary/accent colors
  * and terminology while preserving all other token values.
+ * Gradient tokens are derived from the brand's primary color.
  */
 export function applyBrandConfig(brandConfig: BrandConfig): Theme {
   return {
@@ -37,6 +38,10 @@ export function applyBrandConfig(brandConfig: BrandConfig): Theme {
         ...defaultTokens.colors,
         primary: brandConfig.colors.primary,
         accent: brandConfig.colors.accent,
+      },
+      gradients: {
+        ...defaultTokens.gradients,
+        buttonPrimary: [brandConfig.colors.primary, brandConfig.colors.primary],
       },
     },
     terminology: {

@@ -1,281 +1,167 @@
 /**
- * DashboardScreen — Matches the reference mockup exactly.
- * Warm cream background, editorial typography, real lawn photo,
- * outlined circular quick actions, referral row with leaf icon.
+ * DashboardScreen — Redesigned premium home screen.
+ * Hero section with parallax layering, next service card, property snapshot,
+ * quick actions, and activity timeline. Loading skeleton with crossfade.
  */
 
-import React, { useCallback, useState } from 'react';
-import {
-  View,
-  ScrollView,
-  StyleSheet,
-  Pressable,
-  Image,
-  RefreshControl,
-} from 'react-native';
-import { Feather } from '@expo/vector-icons';
+import React, { useCallback, useEffect, useState } from 'react';
+import { View, ScrollView, StyleSheet } from 'react-native';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
+import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '@/theme/BrandThemeProvider';
 import { useAuthStore } from '@/stores/authStore';
-import { Typography } from '@/components/ui';
+import { HeroSection } from '@/components/home/HeroSection';
+import { NextServiceCard } from '@/components/home/NextServiceCard';
+import { PropertySnapshot } from '@/components/home/PropertySnapshot';
+import { QuickActions, QuickActionItem } from '@/components/home/QuickActions';
+import { ActivityTimeline } from '@/components/home/ActivityTimeline';
+import { HomeScreenSkeleton } from '@/components/home/HomeScreenSkeleton';
+import { mockUser, mockAppointment, mockEvents, mockProperty } from '@/data/mockHomeData';
 
 export function DashboardScreen() {
   const { tokens } = useTheme();
+  const navigation = useNavigation<any>();
   const user = useAuthStore((state) => state.user);
-  const [refreshing, setRefreshing] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const onRefresh = useCallback(async () => {
-    setRefreshing(true);
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    setRefreshing(false);
-  }, []);
+  const contentOpacity = useSharedValue(0);
+  const skeletonOpacity = useSharedValue(1);
 
-  const firstName = user?.name?.split(' ')[0] ?? 'Alex';
+  useEffect(() => {
+    // Simulate data loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      skeletonOpacity.value = withTiming(0, { duration: 200 });
+      contentOpacity.value = withTiming(1, { duration: 200 });
+    }, 800);
+
+    return () => clearTimeout(timer);
+  }, [contentOpacity, skeletonOpacity]);
+
+  const contentAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: contentOpacity.value,
+  }));
+
+  const skeletonAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: skeletonOpacity.value,
+  }));
+
+  const firstName = user?.name?.split(' ')[0] ?? mockUser.name.split(' ')[0];
+  const propertyImageUri = mockUser.propertyImageUri;
+  const currentMonth = new Date().getMonth() + 1;
+
+  const quickActions: QuickActionItem[] = [
+    {
+      id: 'track',
+      icon: 'navigation',
+      label: 'Track Service',
+      onPress: () => navigation.navigate('Schedule'),
+    },
+    {
+      id: 'message',
+      icon: 'message-circle',
+      label: 'Message',
+      onPress: () => navigation.navigate('Messages'),
+    },
+    {
+      id: 'property',
+      icon: 'home',
+      label: 'My Property',
+      onPress: () => navigation.navigate('Account'),
+    },
+    {
+      id: 'book',
+      icon: 'plus-circle',
+      label: 'Book Service',
+      onPress: () => navigation.navigate('Schedule'),
+    },
+  ];
+
+  const handleServiceCardPress = useCallback(() => {
+    navigation.navigate('Schedule');
+  }, [navigation]);
 
   return (
-    <ScrollView
-      style={[styles.screen, { backgroundColor: tokens.colors.background }]}
-      contentContainerStyle={styles.content}
-      showsVerticalScrollIndicator={false}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
-    >
-      {/* Header with notification bell */}
-      <View style={styles.headerRow}>
-        <View style={styles.headerLeft}>
-          <Typography variant="body" color={tokens.colors.textSecondary}>
-            Hi, {firstName},
-          </Typography>
-          <Typography variant="h1" style={styles.headline}>
-            Your lawn{'\n'}looks amazing. 🌿
-          </Typography>
-          <Typography
-            variant="body"
-            color={tokens.colors.textSecondary}
-            style={styles.subheadline}
-          >
-            We're here whenever you need us.
-          </Typography>
-        </View>
-        <Pressable style={styles.bellButton} accessibilityLabel="Notifications">
-          <Feather name="bell" size={22} color={tokens.colors.text} />
-        </Pressable>
-      </View>
+    <View style={[styles.screen, { backgroundColor: tokens.colors.background }]}>
+      {/* Hero Section - absolute positioned */}
+      <HeroSection imageUri={propertyImageUri} firstName={firstName} />
 
-      {/* Next Service Card */}
-      <View style={[styles.nextServiceCard, { borderColor: tokens.colors.border }]}>
-        <View style={styles.nextServiceRow}>
-          <Feather name="calendar" size={16} color={tokens.colors.text} />
-          <Typography variant="bodySmall" style={styles.nextServiceLabel}>
-            Next Service
-          </Typography>
-        </View>
-        <Typography variant="h3" style={styles.nextServiceDate}>
-          Wed, May 22 · 8:00 AM
-        </Typography>
-        <Typography variant="body" style={styles.nextServiceType}>
-          Weekly Lawn Mowing
-        </Typography>
-        <Typography variant="bodySmall" color={tokens.colors.textSecondary}>
-          Front & Back Yard
-        </Typography>
-      </View>
+      {/* Loading Skeleton */}
+      {isLoading && (
+        <Animated.View style={[styles.skeletonContainer, skeletonAnimatedStyle]}>
+          <HomeScreenSkeleton />
+        </Animated.View>
+      )}
 
-      {/* Lawn Photo with overlay */}
-      <View style={styles.lawnSection}>
-        <View style={styles.lawnPhotoWrapper}>
-          <Image
-            source={{ uri: 'https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80' }}
-            style={styles.lawnPhoto}
-            resizeMode="cover"
-          />
-          {/* Badge overlay */}
-          <View style={styles.lawnBadgeContainer}>
-            <View style={styles.lawnBadge}>
-              <Typography variant="caption" color="#FFFFFF">
-                Last service — May 15
-              </Typography>
-            </View>
+      {/* Main Content */}
+      <Animated.View style={[styles.contentContainer, contentAnimatedStyle]}>
+        <ScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          {/* Spacer for hero overlap */}
+          <View style={styles.heroSpacer} />
+
+          {/* Next Service Card */}
+          <View style={styles.section}>
+            <NextServiceCard
+              appointment={mockAppointment}
+              onPress={handleServiceCardPress}
+            />
           </View>
-        </View>
-        <Typography variant="body" style={styles.lawnStatusTitle}>
-          Your lawn is in great shape.
-        </Typography>
-        <Typography variant="bodySmall" color={tokens.colors.textSecondary}>
-          We'll keep it that way.
-        </Typography>
-      </View>
 
-      {/* Quick Actions */}
-      <View style={styles.quickActionsSection}>
-        <Typography variant="h3" style={styles.sectionTitle}>
-          Quick Actions
-        </Typography>
-        <View style={styles.quickActionsRow}>
-          <QuickAction icon="file-text" label={'Request\nService'} tokens={tokens} />
-          <QuickAction icon="clipboard" label={'View\nPlan'} tokens={tokens} />
-          <QuickAction icon="credit-card" label={'Make\nPayment'} tokens={tokens} />
-          <QuickAction icon="users" label={'Refer &\nSave'} tokens={tokens} />
-        </View>
-      </View>
+          {/* Property Snapshot */}
+          <View style={styles.section}>
+            <PropertySnapshot
+              healthStatus={mockProperty.healthStatus}
+              lastServiceDate={mockProperty.lastServiceDate}
+              currentMonth={currentMonth}
+            />
+          </View>
 
-      {/* Refer a neighbor row */}
-      <Pressable
-        style={[styles.referralRow, { borderColor: tokens.colors.border }]}
-        onPress={() => {}}
-        accessibilityRole="button"
-      >
-        <Feather name="heart" size={16} color={tokens.colors.primary} style={styles.referralIcon} />
-        <View style={styles.referralContent}>
-          <Typography variant="body" style={styles.referralTitle}>
-            Refer a neighbor
-          </Typography>
-          <Typography variant="bodySmall" color={tokens.colors.textSecondary}>
-            You both get $25 off
-          </Typography>
-        </View>
-        <Feather name="chevron-right" size={18} color={tokens.colors.textMuted} />
-      </Pressable>
-    </ScrollView>
+          {/* Quick Actions */}
+          <View style={styles.section}>
+            <QuickActions actions={quickActions} />
+          </View>
+
+          {/* Activity Timeline */}
+          <View style={styles.section}>
+            <ActivityTimeline events={mockEvents} />
+          </View>
+        </ScrollView>
+      </Animated.View>
+    </View>
   );
 }
-
-// ─── Quick Action ────────────────────────────────────────────────────────────
-
-interface QuickActionProps {
-  icon: keyof typeof Feather.glyphMap;
-  label: string;
-  tokens: ReturnType<typeof useTheme>['tokens'];
-}
-
-function QuickAction({ icon, label, tokens }: QuickActionProps) {
-  return (
-    <Pressable style={styles.quickAction} onPress={() => {}} accessibilityRole="button">
-      <View style={[styles.quickActionCircle, { borderColor: tokens.colors.border }]}>
-        <Feather name={icon} size={20} color={tokens.colors.text} />
-      </View>
-      <Typography
-        variant="caption"
-        color={tokens.colors.textSecondary}
-        style={styles.quickActionLabel}
-        numberOfLines={2}
-      >
-        {label}
-      </Typography>
-    </Pressable>
-  );
-}
-
-// ─── Styles ──────────────────────────────────────────────────────────────────
 
 const styles = StyleSheet.create({
-  screen: { flex: 1 },
-  content: {
-    paddingHorizontal: 20,
-    paddingTop: 60,
+  screen: {
+    flex: 1,
+  },
+  skeletonContainer: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 2,
+  },
+  contentContainer: {
+    flex: 1,
+    zIndex: 1,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
     paddingBottom: 40,
   },
-
-  // Header
-  headerRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
+  heroSpacer: {
+    height: 240,
+  },
+  section: {
+    paddingHorizontal: 20,
     marginBottom: 24,
   },
-  headerLeft: { flex: 1 },
-  bellButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 4,
-  },
-  headline: { marginTop: 2 },
-  subheadline: { marginTop: 8 },
-
-  // Next Service
-  nextServiceCard: {
-    borderWidth: 1,
-    borderRadius: 14,
-    padding: 18,
-    marginBottom: 20,
-    backgroundColor: '#FFFFFF',
-  },
-  nextServiceRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  nextServiceLabel: {
-    marginLeft: 6,
-    fontWeight: '500',
-  },
-  nextServiceDate: { marginBottom: 2 },
-  nextServiceType: { marginBottom: 2 },
-
-  // Lawn Photo
-  lawnSection: { marginBottom: 24 },
-  lawnPhotoWrapper: {
-    width: '100%',
-    height: 190,
-    borderRadius: 14,
-    overflow: 'hidden',
-    marginBottom: 12,
-  },
-  lawnPhoto: {
-    width: '100%',
-    height: '100%',
-  },
-  lawnBadgeContainer: {
-    position: 'absolute',
-    bottom: 12,
-    left: 12,
-  },
-  lawnBadge: {
-    backgroundColor: 'rgba(45, 74, 45, 0.85)',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 6,
-  },
-  lawnStatusTitle: { fontWeight: '600', marginBottom: 2 },
-
-  // Quick Actions
-  quickActionsSection: { marginBottom: 20 },
-  sectionTitle: { marginBottom: 14 },
-  quickActionsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  quickAction: {
-    alignItems: 'center',
-    width: 72,
-  },
-  quickActionCircle: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 6,
-    backgroundColor: '#FFFFFF',
-  },
-  quickActionLabel: {
-    textAlign: 'center',
-    lineHeight: 14,
-  },
-
-  // Referral
-  referralRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 16,
-    paddingHorizontal: 4,
-    borderTopWidth: StyleSheet.hairlineWidth,
-  },
-  referralIcon: { marginRight: 12 },
-  referralContent: { flex: 1 },
-  referralTitle: { fontWeight: '500', marginBottom: 1 },
 });
