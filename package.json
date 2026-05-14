@@ -5,7 +5,8 @@
   "description": "Servvo MVP Customer App - White-label mobile experience for homeowners",
   "workspaces": [
     "apps/mobile",
-    "apps/backend"
+    "apps/backend",
+    "apps/web"
   ],
   "scripts": {
     "mobile:start": "npm run dev -w apps/mobile",
@@ -23,7 +24,10 @@
     "lint": "npm run lint --workspaces --if-present",
     "lint:mobile": "npm run lint -w apps/mobile",
     "lint:backend": "npm run lint -w apps/backend",
-    "clean": "rm -rf node_modules apps/mobile/node_modules apps/backend/node_modules"
+    "web:dev": "npm run dev -w apps/web",
+    "web:build": "npm run build -w apps/web",
+    "web:test": "npm run test -w apps/web",
+    "clean": "rm -rf node_modules apps/mobile/node_modules apps/backend/node_modules apps/web/node_modules"
   },
   "engines": {
     "node": ">=18.0.0"
