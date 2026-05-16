@@ -2,17 +2,36 @@ import React from 'react';
 import { View, ViewStyle, TextStyle } from 'react-native';
 import { Image, ImageStyle } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
-import { buildGreeting } from '@/utils/greetingUtils';
+import { buildGreeting, buildIndustryGreeting } from '@/utils/greetingUtils';
 import { Typography } from '@/components/ui/Typography';
+import { IndustryConfig } from '@/config/industry.types';
 
 export interface HeroSectionProps {
   imageUri: string;
   firstName: string;
+  /** Optional industry greeting line — enables industry-aware greeting */
+  greetingLine?: string;
+  /** Optional full industry config for buildIndustryGreeting */
+  config?: IndustryConfig;
 }
 
-export function HeroSection({ imageUri, firstName }: HeroSectionProps) {
+export function HeroSection({ imageUri, firstName, greetingLine, config }: HeroSectionProps) {
   const currentHour = new Date().getHours();
-  const greeting = buildGreeting(firstName, currentHour);
+
+  // Use industry-aware greeting if config is provided, otherwise fall back to default
+  let greeting: string;
+  if (config) {
+    greeting = buildIndustryGreeting(config, firstName, currentHour);
+  } else if (greetingLine) {
+    // Build a minimal config-like greeting using the greetingLine
+    greeting = buildIndustryGreeting(
+      { hero: { greetingLine, imageUri } } as IndustryConfig,
+      firstName,
+      currentHour
+    );
+  } else {
+    greeting = buildGreeting(firstName, currentHour);
+  }
 
   const containerStyle: ViewStyle = {
     width: '100%',

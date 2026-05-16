@@ -1,18 +1,17 @@
 /**
  * BrandThemeProvider — React context provider that resolves the current theme
- * by merging the brand config (if available) into the default theme.
+ * by merging industry config and brand config into the default theme.
  *
- * Usage:
- *   <BrandThemeProvider>
- *     <App />
- *   </BrandThemeProvider>
- *
- * Consumers access the resolved theme via the useTheme() hook.
+ * Resolution order:
+ * 1. buildIndustryTheme(industryConfig) — base industry theme
+ * 2. BrandConfig overrides (if present) — portal brand colors on top
  */
 
 import React, { createContext, useContext, useMemo } from 'react';
 import { useBrandStore } from '../stores/brandStore';
-import { applyBrandConfig, defaultTheme, Theme } from './defaultTheme';
+import { useIndustryStore } from '../stores/industryStore';
+import { defaultTheme, Theme } from './defaultTheme';
+import { buildIndustryTheme } from '../config/buildIndustryTheme';
 
 const ThemeContext = createContext<Theme>(defaultTheme);
 
@@ -22,18 +21,36 @@ export interface BrandThemeProviderProps {
 
 /**
  * Provides the resolved Theme to the component tree.
- * If a BrandConfig is present in the store, it merges brand colors/terminology
- * into the theme. Otherwise, the default Servvo theme is used.
+ * Industry config is applied first, then BrandConfig overrides layer on top.
  */
 export function BrandThemeProvider({ children }: BrandThemeProviderProps) {
   const brandConfig = useBrandStore((state) => state.brandConfig);
+  const industryConfig = useIndustryStore((state) => state.config);
 
   const theme = useMemo<Theme>(() => {
+    // Industry config takes precedence as the primary theming mechanism
+    let resolved = buildIndustryTheme(industryConfig);
+
     if (brandConfig) {
-      return applyBrandConfig(brandConfig);
+      // Portal brand overrides layer on top of industry defaults
+      resolved = {
+        ...resolved,
+        tokens: {
+          ...resolved.tokens,
+          colors: {
+            ...resolved.tokens.colors,
+            primary: brandConfig.colors.primary,
+            accent: brandConfig.colors.accent,
+          },
+        },
+        terminology: {
+          serviceProvider: brandConfig.terminology.serviceProvider,
+        },
+      };
     }
-    return defaultTheme;
-  }, [brandConfig]);
+
+    return resolved;
+  }, [brandConfig, industryConfig]);
 
   return (
     <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>

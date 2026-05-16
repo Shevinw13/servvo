@@ -1,7 +1,9 @@
 /**
- * Seasonal lawn care tips mapped by month.
- * Every month (1-12) returns a relevant, non-empty tip string.
+ * Seasonal tips utilities.
+ * Supports both the legacy lawn-care-only tips and industry-aware tips.
  */
+
+import { IndustryConfig } from '@/config/industry.types';
 
 const tips: Record<number, string> = {
   1: 'Keep off frozen grass to prevent damage to dormant turf.',
@@ -24,4 +26,13 @@ const tips: Record<number, string> = {
  */
 export function getSeasonalTip(month: number): string {
   return tips[month] || 'Keep your lawn healthy with regular care and attention.';
+}
+
+/**
+ * Returns an industry-specific seasonal tip for the given month.
+ * Reads from the config's seasonalTips map. Falls back to a generic tip
+ * if the month has no entry.
+ */
+export function getIndustrySeasonalTip(config: IndustryConfig, month: number): string {
+  return config.seasonalTips[month] || 'Keep your home healthy with regular care and attention.';
 }

@@ -1,7 +1,7 @@
 /**
  * DashboardScreen — Premium immersive home screen.
- * Hero → Floating Service Card → Property Insights → Activity Feed.
- * No quick actions. Calm, property-centric, emotionally sophisticated.
+ * Hero → IndustrySwitcher → Floating Service Card → Property Insights → Activity Feed.
+ * Industry-aware: all content driven by the active IndustryConfig.
  */
 
 import React, { useCallback, useEffect, useState } from 'react';
@@ -14,18 +14,20 @@ import Animated, {
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '@/theme/BrandThemeProvider';
 import { useAuthStore } from '@/stores/authStore';
+import { useIndustryStore } from '@/stores/industryStore';
 import { Typography } from '@/components/ui';
 import { HeroSection } from '@/components/home/HeroSection';
 import { NextServiceCard } from '@/components/home/NextServiceCard';
 import { PropertySnapshot } from '@/components/home/PropertySnapshot';
 import { ActivityTimeline } from '@/components/home/ActivityTimeline';
 import { HomeScreenSkeleton } from '@/components/home/HomeScreenSkeleton';
-import { mockUser, mockAppointment, mockEvents, mockProperty } from '@/data/mockHomeData';
+import { IndustrySwitcher } from '@/components/dev/IndustrySwitcher';
 
 export function DashboardScreen() {
   const { tokens } = useTheme();
   const navigation = useNavigation<any>();
   const user = useAuthStore((state) => state.user);
+  const { config } = useIndustryStore();
   const [isLoading, setIsLoading] = useState(true);
 
   const contentOpacity = useSharedValue(0);
@@ -48,9 +50,15 @@ export function DashboardScreen() {
     opacity: skeletonOpacity.value,
   }));
 
-  const firstName = user?.name?.split(' ')[0] ?? mockUser.name.split(' ')[0];
-  const propertyImageUri = mockUser.propertyImageUri;
+  const firstName = user?.name?.split(' ')[0] ?? 'Alex';
   const currentMonth = new Date().getMonth() + 1;
+
+  // Industry-aware appointment mock
+  const appointment = {
+    id: '1',
+    ...config.mockAppointment,
+    status: 'scheduled' as const,
+  };
 
   const handleServiceCardPress = useCallback(() => {
     navigation.navigate('Schedule');
@@ -59,7 +67,12 @@ export function DashboardScreen() {
   return (
     <View style={[styles.screen, { backgroundColor: tokens.colors.background }]}>
       {/* Hero Section - absolute positioned, immersive */}
-      <HeroSection imageUri={propertyImageUri} firstName={firstName} />
+      <HeroSection
+        imageUri={config.hero.imageUri}
+        firstName={firstName}
+        greetingLine={config.hero.greetingLine}
+        config={config}
+      />
 
       {/* Loading Skeleton */}
       {isLoading && (
@@ -78,10 +91,13 @@ export function DashboardScreen() {
           {/* Spacer for hero */}
           <View style={styles.heroSpacer} />
 
+          {/* Industry Switcher */}
+          <IndustrySwitcher />
+
           {/* Floating Service Card */}
           <View style={styles.cardSection}>
             <NextServiceCard
-              appointment={mockAppointment}
+              appointment={appointment}
               onPress={handleServiceCardPress}
             />
           </View>
@@ -96,8 +112,7 @@ export function DashboardScreen() {
               YOUR PROPERTY
             </Typography>
             <PropertySnapshot
-              healthStatus={mockProperty.healthStatus}
-              lastServiceDate={mockProperty.lastServiceDate}
+              config={config}
               currentMonth={currentMonth}
             />
           </View>
@@ -111,7 +126,7 @@ export function DashboardScreen() {
             >
               RECENT ACTIVITY
             </Typography>
-            <ActivityTimeline events={mockEvents.slice(0, 4)} />
+            <ActivityTimeline events={config.mockEvents.slice(0, 4)} />
           </View>
         </ScrollView>
       </Animated.View>

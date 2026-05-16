@@ -3,6 +3,8 @@
  * Provides time-of-day-aware personalized greetings.
  */
 
+import { IndustryConfig } from '@/config/industry.types';
+
 /**
  * Returns the time-of-day segment based on the hour (0-23).
  * - 5-11: morning
@@ -29,5 +31,26 @@ export function buildGreeting(firstName: string, hour: number): string {
       return `Good afternoon, ${firstName}`;
     case 'evening':
       return `Your lawn is looking incredible this evening, ${firstName}`;
+  }
+}
+
+/**
+ * Builds an industry-aware personalized greeting.
+ * Uses the industry config's hero greeting line for evening hours.
+ */
+export function buildIndustryGreeting(
+  config: IndustryConfig,
+  firstName: string,
+  hour: number
+): string {
+  const timeOfDay = getTimeOfDayGreeting(hour);
+
+  switch (timeOfDay) {
+    case 'morning':
+      return `Good morning, ${firstName}`;
+    case 'afternoon':
+      return `Good afternoon, ${firstName}`;
+    case 'evening':
+      return `${config.hero.greetingLine}, ${firstName}`;
   }
 }
