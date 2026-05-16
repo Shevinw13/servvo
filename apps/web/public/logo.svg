@@ -1,0 +1,17 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2BA89D"/>
+      <stop offset="100%" stop-color="#1B3A5C"/>
+    </linearGradient>
+  </defs>
+  <!-- House roof shape -->
+  <path d="M100 20L30 70V80L100 30L170 80V70L100 20Z" fill="url(#logoGradient)"/>
+  <!-- House body / S shape -->
+  <path d="M45 75L100 35L155 75V95C155 105 147 113 137 113H63C53 113 45 121 45 131V155C45 165 53 173 63 173H137C147 173 155 165 155 155V140H137V155C137 157 135 159 133 159H67C65 159 63 157 63 155V131C63 129 65 127 67 127H137C147 127 155 119 155 109V75H45Z" fill="url(#logoGradient)"/>
+  <!-- Window -->
+  <rect x="85" y="55" width="12" height="12" rx="2" fill="url(#logoGradient)" opacity="0.8"/>
+  <rect x="103" y="55" width="12" height="12" rx="2" fill="url(#logoGradient)" opacity="0.8"/>
+  <rect x="85" y="73" width="12" height="12" rx="2" fill="url(#logoGradient)" opacity="0.8"/>
+  <rect x="103" y="73" width="12" height="12" rx="2" fill="url(#logoGradient)" opacity="0.8"/>
+</svg>

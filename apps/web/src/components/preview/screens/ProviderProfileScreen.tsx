@@ -55,7 +55,7 @@ export function ProviderProfileScreen({ config }: ProviderProfileScreenProps) {
           Specialties
         </p>
         <div className="flex flex-wrap gap-1">
-          {['Lawn Mowing', 'Edging', 'Fertilization', 'Weed Control'].map((s) => (
+          {['Service Visit', 'Maintenance', 'Inspection', 'Treatment'].map((s) => (
             <span
               key={s}
               className="rounded-full px-2 py-0.5 text-[9px] font-medium"
@@ -73,7 +73,7 @@ export function ProviderProfileScreen({ config }: ProviderProfileScreenProps) {
           Recent Reviews
         </p>
         <div className="space-y-2">
-          {['Great work on my lawn!', 'Always on time and professional.'].map((review, i) => (
+          {['Great work on my home!', 'Always on time and professional.'].map((review, i) => (
             <div key={i} className="rounded-lg border border-gray-100 p-2">
               <p className="text-[9px] text-gray-700">&ldquo;{review}&rdquo;</p>
               <p className="mt-1 text-[8px] text-gray-400">— Customer {i + 1}</p>

@@ -48,7 +48,7 @@ export function BusinessInfoStep({ onNext, onBack }: BusinessInfoStepProps) {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="e.g. Green Valley Lawn Care"
+            placeholder="e.g. GreenScape Services"
             className="w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
           />
           {errors.name && <p className="mt-1 text-xs text-destructive">{errors.name}</p>}

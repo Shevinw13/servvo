@@ -49,11 +49,13 @@ export function Sidebar() {
       {/* Logo */}
       <div className="flex h-16 items-center border-b border-border px-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-            <span className="text-sm font-bold text-primary-foreground">S</span>
+          <div className="flex h-9 w-9 items-center justify-center">
+            <img src="/icon.png" alt="Servvo" className="h-9 w-9 rounded-lg" />
           </div>
           {!collapsed && (
-            <span className="text-lg font-semibold text-foreground">Servvo</span>
+            <span className="text-lg font-semibold text-foreground">
+              serv<span className="text-[#2BA89D]">vo</span>
+            </span>
           )}
         </div>
       </div>

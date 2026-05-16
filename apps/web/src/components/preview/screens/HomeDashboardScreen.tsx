@@ -28,7 +28,7 @@ export function HomeDashboardScreen({ config }: HomeDashboardScreenProps) {
         <p className="text-[10px] font-medium uppercase tracking-wide" style={{ color: colors.primary }}>
           Next Service
         </p>
-        <p className="mt-1 text-xs font-semibold text-gray-900">Full Lawn Mowing</p>
+        <p className="mt-1 text-xs font-semibold text-gray-900">Scheduled Service</p>
         <p className="text-[10px] text-gray-600">Tomorrow, 9:00 AM</p>
         <div className="mt-2 flex items-center gap-2">
           <div
@@ -60,7 +60,7 @@ export function HomeDashboardScreen({ config }: HomeDashboardScreenProps) {
           <div key={i} className="mb-2 flex items-center gap-2 rounded-lg border border-gray-100 p-2">
             <div className="h-8 w-8 rounded-lg bg-gray-100" />
             <div>
-              <p className="text-[10px] font-medium text-gray-900">Lawn Mowing</p>
+              <p className="text-[10px] font-medium text-gray-900">Service Visit</p>
               <p className="text-[9px] text-gray-500">Mar {10 + i} • Completed</p>
             </div>
           </div>

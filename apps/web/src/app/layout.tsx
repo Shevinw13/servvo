@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
   title: 'Servvo Business Platform',
-  description: 'White-label business management platform for lawn care professionals',
+  description: 'White-label customer experience platform for home service businesses',
 };
 
 export default function RootLayout({

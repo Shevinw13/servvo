@@ -21,7 +21,7 @@ export function ServiceStatusScreen({ config }: ServiceStatusScreenProps) {
       <div className="h-2" />
 
       <h2 className="mb-1 text-sm font-bold text-gray-900">Service Status</h2>
-      <p className="mb-4 text-[10px] text-gray-500">Full Lawn Mowing</p>
+      <p className="mb-4 text-[10px] text-gray-500">Scheduled Service</p>
 
       {/* Status Steps */}
       <div className="mb-4 space-y-0">

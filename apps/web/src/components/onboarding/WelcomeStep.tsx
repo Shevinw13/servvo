@@ -13,13 +13,13 @@ export function WelcomeStep({ onNext }: WelcomeStepProps) {
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-primary"
+        className="mb-6"
       >
-        <span className="text-3xl font-bold text-primary-foreground">S</span>
+        <img src="/icon.png" alt="Servvo" className="h-20 w-20 rounded-2xl shadow-lg" />
       </motion.div>
 
       <h1 className="mb-3 text-3xl font-bold text-foreground">
-        Launch your premium customer experience
+        Better Service Starts at Home
       </h1>
       <p className="mb-8 max-w-md text-lg text-muted-foreground">
         Set up your white-label brand in minutes. Your customers will see your brand, your colors, your voice — powered by Servvo.

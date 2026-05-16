@@ -15,7 +15,7 @@ export const lawnCareConfig: IndustryConfig = {
   },
   gradients: {
     heroOverlay: ['transparent', 'rgba(249,248,244,0.0)', 'rgba(249,248,244,0.85)', '#F9F8F4'],
-    buttonPrimary: ['#1F3D1F', '#1A331A'],
+    buttonPrimary: ['#1B3A5C', '#2BA89D'],
   },
 
   terminology: {

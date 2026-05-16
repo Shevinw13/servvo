@@ -124,7 +124,7 @@ export default function DashboardPage() {
                   Recent Activity
                 </h2>
                 <div className="space-y-3">
-                  <ActivityRow icon={CheckCircle} text="Lawn service completed — Sarah M." time="2h ago" color="text-green-600" />
+                  <ActivityRow icon={CheckCircle} text="Service completed — Sarah M." time="2h ago" color="text-green-600" />
                   <ActivityRow icon={Star} text="5-star review received — David K." time="4h ago" color="text-amber-500" />
                   <ActivityRow icon={Camera} text="Provider uploaded service photos" time="5h ago" color="text-blue-500" />
                   <ActivityRow icon={MessageCircle} text="Homeowner message — Jennifer R." time="6h ago" color="text-primary" />

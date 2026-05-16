@@ -6,8 +6,8 @@
 
 export const defaultTokens = {
   colors: {
-    primary: '#1F3D1F', // Deep rich forest green
-    primaryLight: '#2D5A2D', // Lighter forest green
+    primary: '#1B3A5C', // Deep navy (Servvo brand)
+    primaryLight: '#2A4D6E', // Lighter navy
     accent: '#4A7A3D', // Rich sage green
     accentLight: '#7BAF6A', // Warm light sage
     background: '#F9F8F4', // Warm ivory
@@ -23,7 +23,7 @@ export const defaultTokens = {
   },
   gradients: {
     heroOverlay: ['transparent', 'rgba(249, 248, 244, 0.0)', 'rgba(249, 248, 244, 0.85)', '#F9F8F4'],
-    buttonPrimary: ['#1F3D1F', '#1A331A'],
+    buttonPrimary: ['#1B3A5C', '#2BA89D'],
   },
   spacing: {
     xs: 4,

@@ -1,12 +1,10 @@
 /**
- * WelcomeScreen — Premium editorial welcome experience.
- * Warm cream background, leaf motif, feature list with organic styling.
- *
- * Validates: Requirements 1.1
+ * WelcomeScreen — Premium Servvo branded welcome experience.
+ * Navy/teal brand identity with app icon and tagline.
  */
 
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { useTheme } from '@/theme/BrandThemeProvider';
 import { Button, Typography } from '@/components/ui';
 
@@ -25,16 +23,16 @@ const FEATURES: FeatureItem[] = [
     description: 'Vetted experts who care for your home.',
   },
   {
-    title: 'Beautiful Results',
-    description: 'We take pride in every detail.',
-  },
-  {
     title: 'Real-time Updates',
     description: 'Know what\'s happening, every step of the way.',
   },
   {
+    title: 'Effortless Payments',
+    description: 'Pay securely, right from the app.',
+  },
+  {
     title: 'Personalized Care',
-    description: 'Plans tailored to your lawn\'s unique needs.',
+    description: 'Services tailored to your home\'s unique needs.',
   },
 ];
 
@@ -43,41 +41,37 @@ export function WelcomeScreen({ onGetStarted }: WelcomeScreenProps) {
 
   return (
     <View style={[styles.container, { backgroundColor: tokens.colors.background }]}>
-      {/* Logo */}
-      <View style={styles.logoContainer}>
-        <Text style={styles.leafIcon}>🌿</Text>
-        <Text style={[styles.logoText, { color: tokens.colors.primary }]}>
-          servvo
-        </Text>
+      {/* App Icon */}
+      <View style={styles.iconContainer}>
+        <Image
+          source={require('../../../assets/icon.png')}
+          style={styles.appIcon}
+          resizeMode="contain"
+        />
       </View>
 
-      {/* Headline */}
-      <Typography variant="h1" style={styles.headline}>
-        Your home. Our care.
-      </Typography>
+      {/* Brand Name */}
+      <View style={styles.brandContainer}>
+        <Typography variant="h1" style={styles.brandText}>
+          serv<Typography variant="h1" color="#2BA89D" style={styles.brandAccent}>vo</Typography>
+        </Typography>
+      </View>
 
-      {/* Subtitle */}
-      <Typography
-        variant="body"
-        color={tokens.colors.textSecondary}
-        style={styles.subtitle}
-      >
-        Premium lawn care. Effortless experience.
+      {/* Tagline */}
+      <Typography variant="body" color={tokens.colors.textSecondary} style={styles.tagline}>
+        Better Service Starts at Home
       </Typography>
 
       {/* Feature list */}
       <View style={styles.featureList}>
         {FEATURES.map((feature) => (
           <View key={feature.title} style={styles.featureItem}>
-            <Text style={styles.featureBullet}>🌿</Text>
+            <View style={[styles.featureDot, { backgroundColor: '#2BA89D' }]} />
             <View style={styles.featureContent}>
               <Typography variant="body" style={styles.featureTitle}>
                 {feature.title}
               </Typography>
-              <Typography
-                variant="bodySmall"
-                color={tokens.colors.textSecondary}
-              >
+              <Typography variant="bodySmall" color={tokens.colors.textSecondary}>
                 {feature.description}
               </Typography>
             </View>
@@ -106,37 +100,42 @@ const styles = StyleSheet.create({
     paddingTop: 80,
     paddingBottom: 48,
   },
-  logoContainer: {
-    flexDirection: 'row',
+  iconContainer: {
     alignItems: 'center',
-    marginBottom: 32,
+    marginBottom: 16,
   },
-  leafIcon: {
-    fontSize: 28,
-    marginRight: 8,
+  appIcon: {
+    width: 72,
+    height: 72,
+    borderRadius: 16,
   },
-  logoText: {
-    fontSize: 28,
-    fontWeight: '700',
-    letterSpacing: -0.5,
-  },
-  headline: {
+  brandContainer: {
+    alignItems: 'center',
     marginBottom: 8,
   },
-  subtitle: {
-    marginBottom: 32,
+  brandText: {
+    letterSpacing: -0.5,
+  },
+  brandAccent: {
+    letterSpacing: -0.5,
+  },
+  tagline: {
+    textAlign: 'center',
+    marginBottom: 36,
   },
   featureList: {
-    gap: 20,
+    gap: 18,
   },
   featureItem: {
     flexDirection: 'row',
     alignItems: 'flex-start',
   },
-  featureBullet: {
-    fontSize: 16,
+  featureDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
     marginRight: 12,
-    marginTop: 2,
+    marginTop: 7,
   },
   featureContent: {
     flex: 1,
