@@ -2,7 +2,7 @@ import { IndustryConfig } from '../industry.types';
 
 export const hvacConfig: IndustryConfig = {
   vertical: 'hvac',
-  displayName: 'HVAC',
+  displayName: 'Elite Air HVAC',
 
   colors: {
     primary: '#1E2D42',
@@ -25,8 +25,8 @@ export const hvacConfig: IndustryConfig = {
   },
 
   hero: {
-    greetingLine: 'Your home comfort is running perfectly',
-    imageUri: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
+    greetingLine: 'Your home feels perfect today',
+    imageUri: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80',
   },
 
   insightCards: [

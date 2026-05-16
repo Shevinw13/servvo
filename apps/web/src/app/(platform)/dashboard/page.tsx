@@ -37,7 +37,7 @@ export default function DashboardPage() {
             {config.businessName ? `${config.businessName}` : 'Your Business'}
           </h1>
           <p className="mt-1 text-muted-foreground">
-            Customer experience intelligence
+            Homeowner relationship intelligence
           </p>
         </div>
 
@@ -104,15 +104,15 @@ export default function DashboardPage() {
             <AnimatedCard delay={0.25}>
               <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
                 <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                  Customer Intelligence
+                  Homeowner Intelligence
                 </h2>
                 <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
-                  <InsightCard label="Active Properties" value={`${activeCustomers}`} />
-                  <InsightCard label="Avg Response Time" value="12 min" />
-                  <InsightCard label="Review Conversion" value="68%" />
-                  <InsightCard label="Customer Satisfaction" value="4.8/5" />
+                  <InsightCard label="Renewal Rate" value="94%" />
                   <InsightCard label="Homeowner Loyalty" value="92%" />
+                  <InsightCard label="Service Consistency" value="98%" />
                   <InsightCard label="Communication Health" value="Excellent" />
+                  <InsightCard label="App Engagement" value="High" />
+                  <InsightCard label="Churn Risk" value="Low" />
                 </div>
               </div>
             </AnimatedCard>

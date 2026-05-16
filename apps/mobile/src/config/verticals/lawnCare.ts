@@ -2,7 +2,7 @@ import { IndustryConfig } from '../industry.types';
 
 export const lawnCareConfig: IndustryConfig = {
   vertical: 'lawn_care',
-  displayName: 'Lawn Care',
+  displayName: 'GreenScape Lawn',
 
   colors: {
     primary: '#1F3D1F',

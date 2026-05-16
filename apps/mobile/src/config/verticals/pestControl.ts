@@ -2,7 +2,7 @@ import { IndustryConfig } from '../industry.types';
 
 export const pestControlConfig: IndustryConfig = {
   vertical: 'pest_control',
-  displayName: 'Pest Control',
+  displayName: 'Shield Pest Control',
 
   colors: {
     primary: '#2D2D2D',
@@ -25,8 +25,8 @@ export const pestControlConfig: IndustryConfig = {
   },
 
   hero: {
-    greetingLine: 'Your home is protected and cared for',
-    imageUri: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
+    greetingLine: 'Your home feels protected and peaceful',
+    imageUri: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80',
   },
 
   insightCards: [

@@ -13,9 +13,9 @@ import { Typography } from '@/components/ui/Typography';
 import { useTheme } from '@/theme/BrandThemeProvider';
 
 const SERVICE_LABELS: Record<IndustryVertical, string> = {
-  lawn_care: 'Lawn Care',
-  hvac: 'HVAC',
-  pest_control: 'Pest Protection',
+  lawn_care: 'GreenScape Lawn',
+  hvac: 'Elite Air HVAC',
+  pest_control: 'Shield Pest Control',
 };
 
 export function IndustrySwitcher() {
@@ -36,11 +36,8 @@ export function IndustrySwitcher() {
         onPress={() => setOpen(true)}
         style={[styles.selectorButton, { borderColor: tokens.colors.border }]}
         accessibilityRole="button"
-        accessibilityLabel="Select service type"
+        accessibilityLabel="Select service provider"
       >
-        <Typography variant="caption" color={tokens.colors.textMuted} style={styles.prefix}>
-          Property:
-        </Typography>
         <Typography variant="bodyEmphasis" color={tokens.colors.text}>
           {SERVICE_LABELS[currentVertical]}
         </Typography>
