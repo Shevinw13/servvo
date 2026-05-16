@@ -5,17 +5,17 @@ export const pestControlConfig: IndustryConfig = {
   displayName: 'Pest Control',
 
   colors: {
-    primary: '#2A2A2A',
-    primaryLight: '#3D3D3D',
-    accent: '#5A8A5A',
-    accentLight: '#7DAF7D',
-    background: '#F8F6F3',
+    primary: '#2D2D2D',
+    primaryLight: '#404040',
+    accent: '#6B8A5A',
+    accentLight: '#8DAF7D',
+    background: '#F8F7F4',
     success: '#4A7A4A',
     warning: '#8A6B2A',
   },
   gradients: {
-    heroOverlay: ['transparent', 'rgba(248,246,243,0.0)', 'rgba(248,246,243,0.85)', '#F8F6F3'],
-    buttonPrimary: ['#2A2A2A', '#1F1F1F'],
+    heroOverlay: ['transparent', 'rgba(248,247,244,0.0)', 'rgba(248,247,244,0.85)', '#F8F7F4'],
+    buttonPrimary: ['#2D2D2D', '#222222'],
   },
 
   terminology: {
@@ -26,7 +26,7 @@ export const pestControlConfig: IndustryConfig = {
 
   hero: {
     greetingLine: 'Your home is protected and cared for',
-    imageUri: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80',
+    imageUri: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
   },
 
   insightCards: [

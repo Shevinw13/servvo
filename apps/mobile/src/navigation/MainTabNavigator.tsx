@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Feather } from '@expo/vector-icons';
@@ -91,11 +90,15 @@ export function MainTabNavigator() {
         tabBarInactiveTintColor: tokens.colors.textMuted,
         tabBarStyle: {
           backgroundColor: '#FFFFFF',
-          borderTopWidth: StyleSheet.hairlineWidth,
+          borderTopWidth: 0,
           borderTopColor: tokens.colors.border,
           elevation: 0,
-          shadowOpacity: 0,
-          paddingTop: 6,
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: -1 },
+          shadowRadius: 4,
+          shadowOpacity: 0.04,
+          paddingTop: 8,
+          paddingBottom: 4,
         },
         tabBarLabelStyle: {
           fontSize: 11,

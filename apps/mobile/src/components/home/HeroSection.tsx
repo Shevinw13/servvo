@@ -84,7 +84,7 @@ export function HeroSection({ imageUri, firstName, greetingLine, config }: HeroS
         style={gradientStyle}
       />
       <View style={greetingContainerStyle}>
-        <Typography variant="h1" color="#FFFFFF" style={greetingTextStyle}>
+        <Typography variant="h2" color="#FFFFFF" style={greetingTextStyle}>
           {greeting}
         </Typography>
       </View>

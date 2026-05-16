@@ -5,17 +5,17 @@ export const hvacConfig: IndustryConfig = {
   displayName: 'HVAC',
 
   colors: {
-    primary: '#1A2744',
-    primaryLight: '#2A3D5C',
-    accent: '#4A90D9',
-    accentLight: '#7AB3E8',
-    background: '#F5F7FA',
+    primary: '#1E2D42',
+    primaryLight: '#2A3D52',
+    accent: '#5B8AB0',
+    accentLight: '#8BB5D4',
+    background: '#F7F8FA',
     success: '#2D7A4F',
     warning: '#C4841A',
   },
   gradients: {
-    heroOverlay: ['transparent', 'rgba(245,247,250,0.0)', 'rgba(245,247,250,0.85)', '#F5F7FA'],
-    buttonPrimary: ['#1A2744', '#152038'],
+    heroOverlay: ['transparent', 'rgba(247,248,250,0.0)', 'rgba(247,248,250,0.85)', '#F7F8FA'],
+    buttonPrimary: ['#1E2D42', '#182436'],
   },
 
   terminology: {
@@ -26,7 +26,7 @@ export const hvacConfig: IndustryConfig = {
 
   hero: {
     greetingLine: 'Your home comfort is running perfectly',
-    imageUri: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80',
+    imageUri: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
   },
 
   insightCards: [

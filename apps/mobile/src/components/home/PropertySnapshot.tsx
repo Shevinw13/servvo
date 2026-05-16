@@ -45,39 +45,54 @@ export function PropertySnapshot({ config, currentMonth }: PropertySnapshotProps
 
   return (
     <View style={rowStyle}>
-      {cards.map((card) => (
-        <View
-          key={card.id}
-          style={[
-            cardStyle,
-            card.backgroundTint ? { backgroundColor: card.backgroundTint } : undefined,
-          ]}
-        >
-          <View style={iconStyle}>
-            <Feather name={card.icon as any} size={18} color={card.iconColor} />
+      {cards.map((card, index) => {
+        // First card gets stronger presence
+        const isFirst = index === 0;
+        const cardShadowOpacity = isFirst ? 0.09 : 0.05;
+        const cardTint = card.backgroundTint
+          ? isFirst
+            ? card.backgroundTint.replace(/[\d.]+\)$/, (match: string) => {
+                const val = Math.min(parseFloat(match) * 1.5, 1);
+                return `${val})`;
+              })
+            : card.backgroundTint
+          : undefined;
+
+        return (
+          <View
+            key={card.id}
+            style={[
+              cardStyle,
+              { shadowOpacity: cardShadowOpacity },
+              cardTint ? { backgroundColor: cardTint } : undefined,
+            ]}
+          >
+            <View style={iconStyle}>
+              <Feather name={card.icon as any} size={18} color={card.iconColor} />
+            </View>
+            {/* For the third card (seasonal tip), show as caption with 2 lines */}
+            {card.id === config.insightCards[2].id ? (
+              <>
+                <Typography variant="caption" numberOfLines={2} style={{ marginBottom: 2 }}>
+                  {card.displayValue}
+                </Typography>
+                <Typography variant="caption" color={tokens.colors.textSecondary}>
+                  {card.label}
+                </Typography>
+              </>
+            ) : (
+              <>
+                <Typography variant={isFirst ? 'h3' : 'bodyEmphasis'} color={card.iconColor} style={{ marginBottom: 2 }}>
+                  {card.displayValue}
+                </Typography>
+                <Typography variant="caption" color={tokens.colors.textSecondary}>
+                  {card.label}
+                </Typography>
+              </>
+            )}
           </View>
-          {/* For the third card (seasonal tip), show as caption with 2 lines */}
-          {card.id === config.insightCards[2].id ? (
-            <>
-              <Typography variant="caption" numberOfLines={2} style={{ marginBottom: 2 }}>
-                {card.displayValue}
-              </Typography>
-              <Typography variant="caption" color={tokens.colors.textSecondary}>
-                {card.label}
-              </Typography>
-            </>
-          ) : (
-            <>
-              <Typography variant="bodyEmphasis" color={card.iconColor} style={{ marginBottom: 2 }}>
-                {card.displayValue}
-              </Typography>
-              <Typography variant="caption" color={tokens.colors.textSecondary}>
-                {card.label}
-              </Typography>
-            </>
-          )}
-        </View>
-      ))}
+        );
+      })}
     </View>
   );
 }

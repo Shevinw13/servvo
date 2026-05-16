@@ -6,7 +6,7 @@ This plan implements an industry configuration layer for the Servvo mobile app, 
 
 ## Tasks
 
-- [-] 1. Define industry types and interfaces
+- [x] 1. Define industry types and interfaces
   - [ ] 1.1 Create `apps/mobile/src/config/industry.types.ts` with all type definitions
     - Define `IndustryVertical` union type (`'lawn_care' | 'hvac' | 'pest_control'`)
     - Define `IndustryColors`, `IndustryGradients`, `IndustryHero`, `InsightCardConfig`, `ServiceTypeConfig`, `IndustryEvent`, `SeasonalTipsMap` interfaces
