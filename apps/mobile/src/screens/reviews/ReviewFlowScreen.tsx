@@ -1,6 +1,7 @@
 /**
  * ReviewFlowScreen — Star rating (1-5) with optional comment and submit.
- * Shows a thank-you confirmation after successful submission.
+ * Shows a thank-you confirmation after successful submission,
+ * followed by an optional "Share on Google" step.
  *
  * Validates: Requirements 7.1
  */
@@ -12,6 +13,7 @@ import {
   Pressable,
   StyleSheet,
   TextInput,
+  Alert,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useTheme } from '@/theme/BrandThemeProvider';
@@ -19,18 +21,19 @@ import { Typography, Card, Button } from '@/components/ui';
 import { createReview } from '@/services/reviews.service';
 
 interface ReviewFlowScreenProps {
-  route: { params: { appointmentId: string } };
+  route: { params: { appointmentId: string; providerName?: string } };
   navigation: { goBack: () => void };
 }
 
 export function ReviewFlowScreen({ route, navigation }: ReviewFlowScreenProps) {
   const { tokens } = useTheme();
-  const { appointmentId } = route.params;
+  const { appointmentId, providerName = 'your provider' } = route.params;
 
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [showGooglePrompt, setShowGooglePrompt] = useState(false);
 
   const handleSubmit = useCallback(async () => {
     if (rating === 0) return;
@@ -50,6 +53,59 @@ export function ReviewFlowScreen({ route, navigation }: ReviewFlowScreenProps) {
     }
   }, [appointmentId, rating, comment]);
 
+  const handleDone = () => {
+    setShowGooglePrompt(true);
+  };
+
+  const handleOpenGoogle = () => {
+    Alert.alert(
+      'Google Reviews',
+      'Would open Google Business Profile for you to leave a review.',
+      [{ text: 'OK', onPress: () => navigation.goBack() }]
+    );
+  };
+
+  const handleMaybeLater = () => {
+    navigation.goBack();
+  };
+
+  // Google Share Prompt — shown after thank-you
+  if (submitted && showGooglePrompt) {
+    return (
+      <View
+        style={[
+          styles.container,
+          styles.centeredContainer,
+          { backgroundColor: tokens.colors.background },
+        ]}
+      >
+        <Feather name="star" size={56} color={tokens.colors.primary} />
+        <Typography variant="h2" style={styles.thankYouTitle}>
+          Share on Google
+        </Typography>
+        <Typography
+          variant="body"
+          color={tokens.colors.textSecondary}
+          style={styles.googleSubtitle}
+        >
+          Help {providerName} grow! Leave this review on Google too.
+        </Typography>
+        <Button
+          title="Open Google Reviews"
+          onPress={handleOpenGoogle}
+          style={styles.googleButton}
+        />
+        <Button
+          title="Maybe Later"
+          variant="ghost"
+          onPress={handleMaybeLater}
+          style={styles.maybeLaterButton}
+        />
+      </View>
+    );
+  }
+
+  // Thank You screen
   if (submitted) {
     return (
       <View
@@ -72,7 +128,7 @@ export function ReviewFlowScreen({ route, navigation }: ReviewFlowScreenProps) {
         </Typography>
         <Button
           title="Done"
-          onPress={() => navigation.goBack()}
+          onPress={handleDone}
           style={styles.doneButton}
         />
       </View>
@@ -246,6 +302,19 @@ const styles = StyleSheet.create({
   },
   doneButton: {
     marginTop: 32,
+    width: '100%',
+  },
+  googleSubtitle: {
+    marginTop: 12,
+    textAlign: 'center',
+    paddingHorizontal: 16,
+  },
+  googleButton: {
+    marginTop: 32,
+    width: '100%',
+  },
+  maybeLaterButton: {
+    marginTop: 12,
     width: '100%',
   },
 });
