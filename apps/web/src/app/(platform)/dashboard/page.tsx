@@ -98,7 +98,7 @@ export default function DashboardPage() {
         </div>
 
         {/* KPI Metrics Row */}
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
           <AnimatedCard delay={0}>
             <MetricTile
               icon={Users}
@@ -118,7 +118,15 @@ export default function DashboardPage() {
           <AnimatedCard delay={0.1}>
             <MetricTile
               icon={DollarSign}
-              label="Avg Revenue/Homeowner"
+              label="Monthly Revenue"
+              value="$12,400"
+              trend="+18%"
+            />
+          </AnimatedCard>
+          <AnimatedCard delay={0.12}>
+            <MetricTile
+              icon={DollarSign}
+              label="Avg/Homeowner"
               value="$420"
             />
           </AnimatedCard>

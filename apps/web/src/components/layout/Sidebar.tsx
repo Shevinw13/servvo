@@ -10,8 +10,8 @@ import {
   Plug,
   Bell,
   Users,
-  BarChart3,
-  Settings,
+  Calendar,
+  DollarSign,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -19,11 +19,10 @@ const NAV_ITEMS = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
   { id: 'branding', label: 'Branding Studio', icon: Palette, path: '/branding' },
   { id: 'customer-experience', label: 'Experience', icon: MessageSquare, path: '/customer-experience' },
-  { id: 'integrations', label: 'Connected Systems', icon: Plug, path: '/integrations' },
   { id: 'notifications', label: 'Notifications', icon: Bell, path: '/notifications' },
   { id: 'customers', label: 'Homeowners', icon: Users, path: '/customers' },
-  { id: 'analytics', label: 'Analytics', icon: BarChart3, path: '/analytics' },
-  { id: 'settings', label: 'Settings', icon: Settings, path: '/settings' },
+  { id: 'schedule', label: 'Services', icon: Calendar, path: '/schedule' },
+  { id: 'integrations', label: 'Connected Systems', icon: Plug, path: '/integrations' },
 ];
 
 export function Sidebar() {
