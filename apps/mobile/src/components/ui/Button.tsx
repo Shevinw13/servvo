@@ -92,10 +92,9 @@ export function Button({
     return variant === 'primary' ? '#FFFFFF' : tokens.colors.primary;
   };
 
-  const gradientColors: [string, string] = [
-    tokens.colors.primary,
-    darken(tokens.colors.primary, 0.1),
-  ];
+  const gradientColors: [string, string] = tokens.gradients?.buttonPrimary
+    ? [tokens.gradients.buttonPrimary[0], tokens.gradients.buttonPrimary[1]]
+    : [tokens.colors.primary, darken(tokens.colors.primary, 0.1)];
 
   const content = (
     <Pressable
@@ -129,7 +128,7 @@ export function Button({
   );
 
   return (
-    <Animated.View style={animatedStyle}>
+    <Animated.View style={[animatedStyle, style && { width: (style as ViewStyle).width }]}>
       {content}
     </Animated.View>
   );

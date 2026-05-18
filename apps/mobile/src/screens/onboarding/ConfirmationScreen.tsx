@@ -47,17 +47,19 @@ export function ConfirmationScreen({
           color={tokens.colors.textSecondary}
           style={styles.subtitle}
         >
-          Welcome to {businessName}. We're excited to keep your lawn looking its
-          best.
+          Welcome to {businessName}. Your white-glove home service experience
+          starts now.
         </Typography>
 
-        {/* Go to Dashboard button */}
-        <Button
-          title="Go to Dashboard"
-          onPress={onGoToDashboard}
-          variant="primary"
-          style={styles.dashboardButton}
-        />
+        {/* Go to Dashboard button — full-width wrapper to escape centered parent */}
+        <View style={styles.buttonWrapper}>
+          <Button
+            title="Go to Dashboard"
+            onPress={onGoToDashboard}
+            variant="primary"
+            style={styles.dashboardButton}
+          />
+        </View>
       </View>
     </View>
   );
@@ -92,6 +94,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 48,
     paddingHorizontal: 16,
+  },
+  buttonWrapper: {
+    width: '100%',
+    alignSelf: 'stretch',
   },
   dashboardButton: {
     width: '100%',
