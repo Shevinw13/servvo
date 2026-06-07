@@ -2,7 +2,7 @@ import { IndustryConfig } from '../industry.types';
 
 export const hvacConfig: IndustryConfig = {
   vertical: 'hvac',
-  displayName: 'Elite Air HVAC',
+  displayName: 'Unique Heating & Air',
 
   colors: {
     primary: '#1E2D42',
@@ -26,7 +26,7 @@ export const hvacConfig: IndustryConfig = {
 
   hero: {
     greetingLine: 'Your home feels perfect today',
-    imageUri: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80',
+    imageUri: require('../../../assets/providers/hvac-hero.webp'),
   },
 
   insightCards: [
@@ -77,17 +77,17 @@ export const hvacConfig: IndustryConfig = {
   ],
 
   seasonalTips: {
-    1: 'Run your furnace fan on low to circulate warm air evenly.',
-    2: 'Schedule a pre-spring AC inspection before the rush.',
-    3: 'Replace filters now — spring allergens are about to spike.',
-    4: 'Test your AC before the first hot day to catch issues early.',
-    5: 'Set your thermostat to 78°F when home for optimal efficiency.',
-    6: 'Keep vents clear of furniture to maintain proper airflow.',
-    7: 'Clean outdoor condenser coils to maintain peak cooling.',
-    8: 'Check refrigerant levels if cooling seems weak.',
-    9: 'Schedule fall furnace maintenance before heating season.',
-    10: 'Seal duct leaks to prevent heat loss this winter.',
-    11: 'Switch to a clean filter before running your furnace full-time.',
-    12: 'Keep your thermostat at 68°F to balance comfort and efficiency.',
+    1: 'Circulate warm air evenly',
+    2: 'Schedule AC inspection',
+    3: 'Replace air filters now',
+    4: 'Test AC before heat hits',
+    5: 'Set thermostat to 78°F',
+    6: 'Keep vents unblocked',
+    7: 'Clean condenser coils',
+    8: 'Check refrigerant levels',
+    9: 'Schedule furnace tune-up',
+    10: 'Seal any duct leaks',
+    11: 'Fresh filter for winter',
+    12: 'Set thermostat to 68°F',
   },
 };

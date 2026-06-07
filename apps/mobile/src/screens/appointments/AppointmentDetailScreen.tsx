@@ -19,7 +19,7 @@ import {
 import { useTheme } from '@/theme/BrandThemeProvider';
 import { useTerminology } from '@/utils/terminology';
 import { Typography, Card, Button } from '@/components/ui';
-import { StatusProgressBar, StatusBadge } from '@/components/service-status';
+import { StatusProgressBar, StatusBadge, ArrivalMapCard } from '@/components/service-status';
 import type { ServiceStatus } from '@/components/service-status';
 import {
   getAppointmentById,
@@ -197,26 +197,37 @@ export function AppointmentDetailScreen({
 
         {/* Arrival Window — shown when status is "on_the_way" */}
         {displayStatus === 'on_the_way' && (
-          <Card style={{ ...styles.section, backgroundColor: tokens.colors.warning + '10' }}>
-            <Typography variant="h3" style={styles.sectionTitle}>
-              Arrival Window
-            </Typography>
-            <Typography variant="body">
-              {arrivalWindow
-                ? formatTimeWindow(arrivalWindow.start, arrivalWindow.end)
-                : formatTimeWindow(
-                    appointment.arrivalWindowStart,
-                    appointment.arrivalWindowEnd,
-                  )}
-            </Typography>
-            <Typography
-              variant="bodySmall"
-              color={tokens.colors.textSecondary}
-              style={{ marginTop: 4 }}
-            >
-              Your {resolve('{{Provider}}')} is on the way
-            </Typography>
-          </Card>
+          <>
+            {/* Arrival Map Card with ETA */}
+            <View style={{ marginHorizontal: 24, marginTop: 16 }}>
+              <ArrivalMapCard
+                providerName={appointment.providerName}
+                etaMinutes={12}
+                destinationAddress={appointment.propertyAddress}
+              />
+            </View>
+
+            <Card style={{ ...styles.section, backgroundColor: tokens.colors.warning + '10' }}>
+              <Typography variant="h3" style={styles.sectionTitle}>
+                Arrival Window
+              </Typography>
+              <Typography variant="body">
+                {arrivalWindow
+                  ? formatTimeWindow(arrivalWindow.start, arrivalWindow.end)
+                  : formatTimeWindow(
+                      appointment.arrivalWindowStart,
+                      appointment.arrivalWindowEnd,
+                    )}
+              </Typography>
+              <Typography
+                variant="bodySmall"
+                color={tokens.colors.textSecondary}
+                style={{ marginTop: 4 }}
+              >
+                Your {resolve('{{Provider}}')} is on the way
+              </Typography>
+            </Card>
+          </>
         )}
 
         {/* Completion Summary — shown when status is "completed" */}

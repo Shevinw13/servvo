@@ -90,20 +90,22 @@ export function NextServiceCard({ appointment, onPress }: NextServiceCardProps) 
           </View>
           <View style={infoStyle}>
             <Typography variant="bodyEmphasis">{appointment.providerName}</Typography>
-            <StatusPill status={appointment.status} />
+            <Typography variant="caption" color={tokens.colors.textSecondary}>
+              Scheduled for today
+            </Typography>
           </View>
-        </View>
-
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 4 }}>
-          <Feather name="calendar" size={14} color={tokens.colors.textSecondary} />
-          <Typography variant="body" style={{ marginLeft: 6 }}>
-            {appointment.date} · {appointment.time}
-          </Typography>
         </View>
 
         <Typography variant="h3" style={{ marginBottom: 8 }}>
           {appointment.serviceType}
         </Typography>
+
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 4 }}>
+          <Feather name="calendar" size={14} color={tokens.colors.textSecondary} />
+          <Typography variant="bodySmall" color={tokens.colors.textSecondary} style={{ marginLeft: 6 }}>
+            {appointment.date} · {appointment.time}
+          </Typography>
+        </View>
 
         <Typography variant="bodySmall" color={tokens.colors.primary}>
           View Details →

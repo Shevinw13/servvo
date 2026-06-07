@@ -73,7 +73,7 @@ export function PropertySnapshot({ config, currentMonth }: PropertySnapshotProps
             {/* For the third card (seasonal tip), show as caption with 2 lines */}
             {card.id === config.insightCards[2].id ? (
               <>
-                <Typography variant="caption" numberOfLines={2} style={{ marginBottom: 2 }}>
+                <Typography variant="caption" style={{ marginBottom: 2 }}>
                   {card.displayValue}
                 </Typography>
                 <Typography variant="caption" color={tokens.colors.textSecondary}>

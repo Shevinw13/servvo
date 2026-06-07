@@ -2,7 +2,7 @@ import { IndustryConfig } from '../industry.types';
 
 export const lawnCareConfig: IndustryConfig = {
   vertical: 'lawn_care',
-  displayName: 'GreenScape Lawn',
+  displayName: 'Green Giant Lawn Service',
 
   colors: {
     primary: '#1F3D1F',
@@ -26,7 +26,7 @@ export const lawnCareConfig: IndustryConfig = {
 
   hero: {
     greetingLine: 'Your lawn is looking incredible',
-    imageUri: 'https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80',
+    imageUri: require('../../../assets/providers/lawn-hero.jpg'),
   },
 
   insightCards: [
@@ -79,17 +79,17 @@ export const lawnCareConfig: IndustryConfig = {
   ],
 
   seasonalTips: {
-    1: 'Keep off frozen grass to prevent damage to dormant turf.',
-    2: 'Plan your spring lawn care schedule and sharpen mower blades.',
-    3: 'Apply pre-emergent herbicide before soil temperatures rise above 55°F.',
-    4: 'Begin regular mowing — never cut more than one-third of blade height.',
-    5: 'Water deeply but infrequently to encourage deep root growth.',
-    6: 'Raise your mowing height to help grass withstand summer heat.',
-    7: 'Water early in the morning to reduce evaporation and fungal risk.',
-    8: 'Watch for heat stress — footprints that stay visible mean it\u2019s time to water.',
-    9: 'Overseed thin areas and apply fall fertilizer for a strong root system.',
-    10: 'Continue mowing until growth stops and remove fallen leaves promptly.',
-    11: 'Apply winterizer fertilizer to strengthen roots before dormancy.',
-    12: 'Minimize foot traffic on dormant lawns and plan next year\u2019s care schedule.',
+    1: 'Stay off frozen grass',
+    2: 'Sharpen mower blades',
+    3: 'Apply pre-emergent now',
+    4: 'Start regular mowing',
+    5: 'Water deep, less often',
+    6: 'Raise mowing height',
+    7: 'Water early morning',
+    8: 'Watch for heat stress',
+    9: 'Overseed thin areas',
+    10: 'Remove fallen leaves',
+    11: 'Apply winterizer',
+    12: 'Plan next year\u2019s care',
   },
 };

@@ -4,22 +4,30 @@ import Animated from 'react-native-reanimated';
 import { useEntranceAnimation } from '@/hooks/useEntranceAnimation';
 
 export interface StatusPillProps {
-  status: 'confirmed' | 'scheduled' | 'en_route' | 'completed';
+  status: 'confirmed' | 'scheduled' | 'en_route' | 'on_the_way' | 'completed' | 'in_progress' | 'provider_assigned' | 'arrived';
   animated?: boolean;
 }
 
-const STATUS_COLORS: Record<StatusPillProps['status'], { bg: string; text: string }> = {
+const STATUS_COLORS: Record<string, { bg: string; text: string }> = {
   confirmed: { bg: 'rgba(45, 106, 45, 0.12)', text: '#2D6A2D' },
   completed: { bg: 'rgba(45, 106, 45, 0.12)', text: '#2D6A2D' },
   scheduled: { bg: 'rgba(37, 99, 235, 0.12)', text: '#2563EB' },
   en_route: { bg: 'rgba(183, 121, 31, 0.12)', text: '#B7791F' },
+  on_the_way: { bg: 'rgba(183, 121, 31, 0.12)', text: '#B7791F' },
+  in_progress: { bg: 'rgba(37, 99, 235, 0.12)', text: '#2563EB' },
+  provider_assigned: { bg: 'rgba(37, 99, 235, 0.12)', text: '#2563EB' },
+  arrived: { bg: 'rgba(45, 106, 45, 0.12)', text: '#2D6A2D' },
 };
 
-const STATUS_LABELS: Record<StatusPillProps['status'], string> = {
+const STATUS_LABELS: Record<string, string> = {
   confirmed: 'Confirmed',
   completed: 'Completed',
   scheduled: 'Scheduled',
   en_route: 'En Route',
+  on_the_way: 'On The Way',
+  in_progress: 'In Progress',
+  provider_assigned: 'Assigned',
+  arrived: 'Arrived',
 };
 
 export function StatusPill({ status, animated = false }: StatusPillProps) {
@@ -28,7 +36,7 @@ export function StatusPill({ status, animated = false }: StatusPillProps) {
     duration: 300,
   });
 
-  const colors = STATUS_COLORS[status];
+  const colors = STATUS_COLORS[status] || { bg: 'rgba(107, 114, 128, 0.12)', text: '#6B7280' };
 
   const pillStyle: ViewStyle = {
     backgroundColor: colors.bg,
@@ -47,7 +55,7 @@ export function StatusPill({ status, animated = false }: StatusPillProps) {
 
   const content = (
     <View style={pillStyle}>
-      <Text style={textStyle}>{STATUS_LABELS[status]}</Text>
+      <Text style={textStyle}>{STATUS_LABELS[status] || status}</Text>
     </View>
   );
 

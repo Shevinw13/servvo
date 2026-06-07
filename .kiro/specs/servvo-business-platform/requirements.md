@@ -2,23 +2,25 @@
 
 ## Introduction
 
-The Servvo Business Platform is a frontend-only web application where lawn care business owners onboard their company, configure white-label branding, manage CRM integrations (mock), customize the customer experience, and view analytics. The platform lives at `apps/web/` in the existing Servvo monorepo and uses Next.js 14 (App Router), React, TypeScript, Tailwind CSS, shadcn/ui, and Framer Motion. All data is mock/local state — no backend, no APIs, no auth, no databases. The goal is an investor-ready, demo-quality prototype that makes a local lawn care business owner feel premium and empowered.
+The Servvo Business Platform is a web application where home service business owners (lawn care, HVAC, pest control, and more) onboard their company, connect their CRM, configure white-label branding, manage the homeowner experience, send push notifications, and view intelligence dashboards. The platform lives at `apps/web/` in the existing Servvo monorepo and uses Next.js 14 (App Router), React, TypeScript, Tailwind CSS, shadcn/ui, and Framer Motion. Backend integration, AWS infrastructure, and CRM sync logic are handled separately — this spec covers the frontend UI only. The platform supports any home service vertical, not just lawn care.
 
 ## Glossary
 
 - **Platform**: The Servvo Business Platform web application at `apps/web/`
-- **Business_Owner**: The primary user — an owner/operator of a lawn care company
-- **Onboarding_Flow**: The multi-step guided wizard that collects business information and branding preferences
+- **Business_Owner**: The primary user — an owner/operator of a home service company (lawn care, HVAC, pest control, or any recurring service vertical)
+- **Onboarding_Flow**: The multi-step guided wizard that collects business information, CRM connection, and branding preferences
 - **Branding_Studio**: The section where the Business_Owner configures white-label branding (logo, colors, typography, imagery, terminology)
 - **Mobile_Preview**: A phone mockup component that renders a simulated customer app reflecting current branding in real-time
-- **CRM_Integration_Center**: The UI section displaying mock integration cards for third-party CRM tools
+- **CRM_Integration**: Real OAuth 2.0 connection to external CRM systems (Jobber first), enabling bidirectional data sync
+- **Jobber_API**: Jobber's GraphQL API accessed via OAuth 2.0, supporting Clients, Properties, Jobs, Visits, Invoices, Quotes, and Custom Fields with webhook subscriptions for real-time events
 - **Customer_Experience_Settings**: The section where the Business_Owner configures messaging tone, notifications, and service communication
-- **Analytics_Dashboard**: The section displaying mock engagement metrics, charts, and KPIs
-- **Customer_List**: The section displaying mock homeowner profiles and engagement data
+- **Intelligence_Dashboard**: The section displaying real-time computed KPIs (Active Homeowners, Rebooking Rate, Revenue, At-Risk Customers) and actionable intelligence cards
+- **Customer_List**: Real homeowner data synced from CRM, with engagement metrics and action capabilities
 - **Provider_Terminology**: The configurable term used to refer to service professionals (Provider, Crew, Team, or Service Professional)
-- **Brand_Config**: The local state object holding all branding choices (logo, colors, typography, imagery, terminology)
+- **Brand_Config**: The per-Business customization of logo, colors, terminology, imagery, and communication tone, persisted to database and served to mobile app
 - **Sidebar_Navigation**: The persistent left sidebar containing all primary navigation items
-- **Mock_Data**: Static or locally-generated data used to simulate real content without a backend
+- **Webhook**: Real-time event notification from Jobber to Servvo when data changes (new client, job status change, invoice paid)
+- **Bidirectional_Sync**: Data flows both ways — CRM changes propagate to Servvo, and homeowner app actions propagate back to CRM
 
 ## Requirements
 

@@ -2,7 +2,7 @@ import { IndustryConfig } from '../industry.types';
 
 export const pestControlConfig: IndustryConfig = {
   vertical: 'pest_control',
-  displayName: 'Shield Pest Control',
+  displayName: 'Quality Pest Control',
 
   colors: {
     primary: '#2D2D2D',
@@ -26,7 +26,7 @@ export const pestControlConfig: IndustryConfig = {
 
   hero: {
     greetingLine: 'Your home feels protected and peaceful',
-    imageUri: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80',
+    imageUri: require('../../../assets/providers/pest-hero.png'),
   },
 
   insightCards: [
@@ -77,17 +77,17 @@ export const pestControlConfig: IndustryConfig = {
   ],
 
   seasonalTips: {
-    1: 'Seal cracks around windows and doors — rodents seek warmth indoors.',
-    2: 'Inspect attic and crawl spaces for signs of overwintering pests.',
-    3: 'Ant colonies become active — watch for trails near foundations.',
-    4: 'Termite swarm season begins. Report any winged insects indoors.',
-    5: 'Mosquito season starts — eliminate standing water around your home.',
-    6: 'Keep food sealed and counters clean to deter summer ants and roaches.',
-    7: 'Peak pest season — maintain your perimeter barrier treatment.',
-    8: 'Watch for wasp nests under eaves and in garden structures.',
-    9: 'Rodents start seeking indoor shelter as temperatures drop.',
-    10: 'Seal gaps around pipes and utility entries before winter.',
-    11: 'Store firewood away from the house to prevent pest harborage.',
-    12: 'Check holiday decorations from storage for signs of pest activity.',
+    1: 'Seal cracks and gaps',
+    2: 'Inspect attic spaces',
+    3: 'Watch for ant trails',
+    4: 'Termite swarm season',
+    5: 'Eliminate standing water',
+    6: 'Keep food sealed tight',
+    7: 'Maintain perimeter barrier',
+    8: 'Check for wasp nests',
+    9: 'Rodents seeking shelter',
+    10: 'Seal pipes and entries',
+    11: 'Move firewood away',
+    12: 'Check stored items',
   },
 };

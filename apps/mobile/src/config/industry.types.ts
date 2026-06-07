@@ -27,8 +27,8 @@ export interface IndustryGradients {
 export interface IndustryHero {
   /** Greeting suffix — replaces the evening greeting in buildGreeting */
   greetingLine: string;
-  /** Hero background image URI */
-  imageUri: string;
+  /** Hero background image — URI string or local require() asset */
+  imageUri: string | number;
 }
 
 /** A single property insight card definition */

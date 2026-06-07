@@ -6,6 +6,7 @@
 
 import axios from 'axios';
 import { useAuthStore } from '../stores/authStore';
+import { getMockResponse } from './mockInterceptor';
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3000';
 
@@ -29,10 +30,18 @@ api.interceptors.request.use(
   (error) => Promise.reject(error),
 );
 
-// Response interceptor: handle 401 by clearing auth state
+// Response interceptor: mock data fallback when backend is unavailable
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    // If network error (no backend running), try mock data
+    if (error.code === 'ERR_NETWORK' || error.code === 'ECONNREFUSED' || !error.response) {
+      const mockResp = getMockResponse(error.config);
+      if (mockResp) {
+        return Promise.resolve(mockResp);
+      }
+    }
+    // Handle 401 by clearing auth
     if (error.response?.status === 401) {
       useAuthStore.getState().clearAuth();
     }

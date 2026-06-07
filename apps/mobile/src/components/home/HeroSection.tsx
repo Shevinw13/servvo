@@ -7,7 +7,7 @@ import { Typography } from '@/components/ui/Typography';
 import { IndustryConfig } from '@/config/industry.types';
 
 export interface HeroSectionProps {
-  imageUri: string;
+  imageUri: string | number;
   firstName: string;
   /** Optional industry greeting line — enables industry-aware greeting */
   greetingLine?: string;
@@ -54,7 +54,7 @@ export function HeroSection({ imageUri, firstName, greetingLine, config }: HeroS
     bottom: 0,
     left: 0,
     right: 0,
-    height: 200,
+    height: 220,
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 24,
   };
@@ -67,20 +67,20 @@ export function HeroSection({ imageUri, firstName, greetingLine, config }: HeroS
   };
 
   const greetingTextStyle: TextStyle = {
-    textShadowColor: 'rgba(0,0,0,0.7)',
+    textShadowColor: 'rgba(0,0,0,0.8)',
     textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 8,
+    textShadowRadius: 10,
   };
 
   return (
     <View style={containerStyle}>
       <Image
-        source={{ uri: imageUri }}
+        source={typeof imageUri === 'number' ? imageUri : { uri: imageUri }}
         style={imageStyle}
         contentFit="cover"
       />
       <LinearGradient
-        colors={['transparent', 'rgba(0,0,0,0.03)', 'rgba(0,0,0,0.25)', 'rgba(0,0,0,0.65)']}
+        colors={['transparent', 'rgba(0,0,0,0.05)', 'rgba(0,0,0,0.35)', 'rgba(0,0,0,0.75)']}
         style={gradientStyle}
       />
       <View style={greetingContainerStyle}>

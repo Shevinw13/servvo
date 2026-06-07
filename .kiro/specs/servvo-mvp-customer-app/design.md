@@ -283,7 +283,9 @@ src/
 │   │   └── Typography.tsx
 │   ├── service-status/
 │   │   ├── StatusProgressBar.tsx
-│   │   └── StatusBadge.tsx
+│   │   ├── StatusBadge.tsx
+│   │   ├── ArrivalMapCard.tsx
+│   │   └── ETACountdown.tsx
 │   ├── appointments/
 │   │   ├── AppointmentCard.tsx
 │   │   └── ServiceTimeline.tsx

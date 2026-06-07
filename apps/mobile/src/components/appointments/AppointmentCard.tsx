@@ -8,6 +8,7 @@
 
 import React from 'react';
 import { Pressable, View, StyleSheet } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 import { Card, Typography } from '@/components/ui';
 import { StatusBadge } from '@/components/service-status';
 import { useTheme } from '@/theme/BrandThemeProvider';
@@ -62,32 +63,32 @@ export function AppointmentCard({ appointment, onPress }: AppointmentCardProps) 
 
         <View style={styles.details}>
           <View style={styles.row}>
+            <Feather name="calendar" size={13} color={tokens.colors.textSecondary} style={{ marginRight: 6 }} />
             <Typography
               variant="bodySmall"
               color={tokens.colors.textSecondary}
             >
-              📅 {formatDate(appointment.date)}
+              {formatDate(appointment.date)}
             </Typography>
           </View>
 
           <View style={styles.row}>
+            <Feather name="clock" size={13} color={tokens.colors.textSecondary} style={{ marginRight: 6 }} />
             <Typography
               variant="bodySmall"
               color={tokens.colors.textSecondary}
             >
-              🕐 {formatTimeWindow(appointment.arrivalWindowStart, appointment.arrivalWindowEnd)}
+              {formatTimeWindow(appointment.arrivalWindowStart, appointment.arrivalWindowEnd)}
             </Typography>
           </View>
 
           <View style={styles.row}>
+            <Feather name="user" size={13} color={tokens.colors.textSecondary} style={{ marginRight: 6 }} />
             <Typography
               variant="bodySmall"
               color={tokens.colors.textSecondary}
             >
-              👤 {resolve('{{Provider}}')}:{' '}
-            </Typography>
-            <Typography variant="bodySmall">
-              {appointment.providerName}
+              {resolve('{{Provider}}')}: {appointment.providerName}
             </Typography>
           </View>
         </View>

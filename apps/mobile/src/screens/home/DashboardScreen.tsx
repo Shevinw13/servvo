@@ -18,6 +18,7 @@ import { useIndustryStore } from '@/stores/industryStore';
 import { Typography } from '@/components/ui';
 import { HeroSection } from '@/components/home/HeroSection';
 import { NextServiceCard } from '@/components/home/NextServiceCard';
+import { ArrivalMapCard } from '@/components/service-status';
 import { PropertySnapshot } from '@/components/home/PropertySnapshot';
 import { ActivityTimeline } from '@/components/home/ActivityTimeline';
 import { HomeScreenSkeleton } from '@/components/home/HomeScreenSkeleton';
@@ -53,11 +54,11 @@ export function DashboardScreen() {
   const firstName = user?.name?.split(' ')[0] ?? 'Alex';
   const currentMonth = new Date().getMonth() + 1;
 
-  // Industry-aware appointment mock
+  // Industry-aware appointment mock — set to "on_the_way" to demo arrival map
   const appointment = {
     id: '1',
     ...config.mockAppointment,
-    status: 'scheduled' as const,
+    status: 'on_the_way' as const,
   };
 
   const handleServiceCardPress = useCallback(() => {
@@ -101,6 +102,17 @@ export function DashboardScreen() {
               onPress={handleServiceCardPress}
             />
           </View>
+
+          {/* Arrival Map — shown when provider is on the way */}
+          {appointment.status === 'on_the_way' && (
+            <View style={styles.cardSection}>
+              <ArrivalMapCard
+                providerName={appointment.providerName || config.mockAppointment.providerName}
+                etaMinutes={12}
+                destinationAddress="1847 Oak Valley Dr"
+              />
+            </View>
+          )}
 
           {/* Property Insights */}
           <View style={styles.insightSection}>

@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Servvo MVP Customer App is a white-glove, branded mobile experience for homeowners of lawn care businesses. It provides modern communication, service transparency, appointment management, payments, and engagement tools. The app is powered by Servvo infrastructure but presents as the lawn care business's own branded experience. Built with React Native (Expo + TypeScript), NestJS backend, and integrations with Stripe, Firebase, and Twilio.
+Servvo MVP Customer App is a white-glove, branded mobile experience for homeowners of home service businesses (lawn care, HVAC, pest control, and any recurring service vertical). It provides modern communication, service transparency, appointment management, payments, and engagement tools. The app is powered by Servvo infrastructure but presents as the service business's own branded experience — homeowners see their provider's brand, not Servvo. Built with React Native (Expo + TypeScript). Backend and infrastructure are handled separately.
+
+The app supports multi-business homeowners — a single person can use services from multiple providers (e.g., GreenScape Lawn AND Elite Air HVAC), both powered by Servvo, switching between them via a dropdown. Reviews submitted in-app also prompt for Google Reviews.
 
 ## Glossary
 
@@ -92,6 +94,10 @@ Servvo MVP Customer App is a white-glove, branded mobile experience for homeowne
 3. WHEN the Service_Status changes, THE Customer_App SHALL send a Push_Notification to the Homeowner with the updated status
 4. THE Customer_App SHALL display the Arrival_Window when the Service_Status is "On The Way"
 5. WHEN the Service_Status reaches "Completed", THE Customer_App SHALL display a completion summary with service details
+6. WHEN the Service_Status changes to "On The Way", THE Customer_App SHALL display a map card showing the route from the Service_Professional's origin to the Homeowner's property with an estimated arrival time (e.g., "Arriving in ~12 min")
+7. THE map card SHALL display a static route visualization (not live GPS tracking) calculated once when the status changes to "On The Way"
+8. THE map card SHALL display an ETA countdown that updates based on the initial route calculation
+9. WHEN the Service_Status changes from "On The Way" to "Arrived", THE Customer_App SHALL dismiss the map card and display an "Arrived" confirmation
 
 ### Requirement 7: Two-Way Messaging
 
