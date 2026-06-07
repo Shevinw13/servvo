@@ -5,7 +5,7 @@
  */
 
 import React, { useState } from 'react';
-import { View, Pressable, ViewStyle, Modal, StyleSheet } from 'react-native';
+import { View, Pressable, Modal, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useIndustryStore } from '@/stores/industryStore';
 import { getAvailableVerticals } from '@/config/industryConfigs';
@@ -117,15 +117,11 @@ export function IndustrySwitcher() {
   );
 }
 
-const styles: Record<string, ViewStyle> = {
+const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
     paddingTop: 8,
     paddingBottom: 12,
-  },
-  label: {
-    marginBottom: 6,
-    letterSpacing: 0.5,
   },
   selectorButton: {
     flexDirection: 'row',
@@ -145,7 +141,6 @@ const styles: Record<string, ViewStyle> = {
   rightSection: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
   },
   badge: {
     backgroundColor: '#EF4444',
@@ -155,6 +150,7 @@ const styles: Record<string, ViewStyle> = {
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 6,
+    marginRight: 8,
   },
   badgeText: {
     fontSize: 11,
@@ -193,6 +189,8 @@ const styles: Record<string, ViewStyle> = {
   itemRight: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
   },
-};
+  label: {
+    marginBottom: 6,
+  },
+});
